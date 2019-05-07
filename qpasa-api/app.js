@@ -240,6 +240,9 @@ app.use(
 const index = require("./routes/index");
 app.use("/", index);
 
+const events = require("./routes/events");
+app.use("/api", events);
+
 const auth = require('./routes/auth')
 app.use('/api', auth)
 
