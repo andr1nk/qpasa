@@ -11,8 +11,11 @@ const Location = require("../models/Location")
 
 const bcryptSalt = 10;
 
+const mongoDBURL= process.env.NODE_ENV === "development" ?  process.env.MONGO_DEV_URL :  process.env.MONGODB_URI
+
+
 mongoose
-  .connect("mongodb://localhost/qpasa-api", { useNewUrlParser: true })
+  .connect(mongoDBURL, { useNewUrlParser: true })
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
