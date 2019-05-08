@@ -16,6 +16,7 @@ const mongoDBURL= process.env.NODE_ENV === "development" ?  process.env.MONGO_DE
 
 mongoose
   .connect(mongoDBURL, { useNewUrlParser: true })
+  // .connect("mongodb://localhost/qpasa-api", { useNewUrlParser: true })
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -88,102 +89,108 @@ Event.deleteMany()
     throw err
   })
 
-// let locations = [
-//   {
-//     city: "Zürich",
-//     name: "Bogen F",
-//     GPS: "129803120983",
-//     address: "teststreet1234",
-//   },
-//   {
-//     city: "Zürich",
-//     name: "El Lokal",
-//     GPS: "129803120983",
-//     address: "teststreet1234",
-//   },
-//   {
-//     city: "Zürich",
-//     name: "Exil",
-//     GPS: "129803120983",
-//     address: "teststreet1234",
-//   },
-//   {
-//     city: "Zürich",
-//     name: "Hafenkneipe",
-//     GPS: "129803120983",
-//     address: "teststreet1234",
-//   },
-//   {
-//     city: "Zürich",
-//     name: "Helsinki",
-//     GPS: "129803120983",
-//     address: "teststreet1234",
-//   },
-//   {
-//     city: "Zürich",
-//     name: "Kaufleuten",
-//     GPS: "129803120983",
-//     address: "teststreet1234",
-//   },
-//   {
-//     city: "Zürich",
-//     name: "Mascotte",
-//     GPS: "129803120983",
-//     address: "teststreet1234",
-//   },
-//   {
-//     city: "Zürich",
-//     name: "Mehrspur",
-//     GPS: "129803120983",
-//     address: "teststreet1234",
-//   },
-//   {
-//     city: "Zürich",
-//     name: "Moods",
-//     GPS: "129803120983",
-//     address: "teststreet1234",
-//   },
-//   {
-//     city: "Zürich",
-//     name: "Papiersaal",
-//     GPS: "129803120983",
-//     address: "teststreet1234",
-//   },
-//   {
-//     city: "Zürich",
-//     name: "Rote Fabrik",
-//     GPS: "129803120983",
-//     address: "teststreet1234",
-//   },
-//   {
-//     city: "Zürich",
-//     name: "Sender",
-//     GPS: "129803120983",
-//     address: "teststreet1234",
-//   },
-//   {
-//     city: "Zürich",
-//     name: "Stall 6",
-//     GPS: "129803120983",
-//     address: "teststreet1234",
-//   },
-// ]
+let locations = [
+  {
+    city: "Zürich",
+    name: "Bogen F",
+    GPS: "129803120983",
+    address: "teststreet1234",
+  },
+  {
+    city: "Zürich",
+    name: "Dynamo",
+    GPS: "129803120983",
+    address: "teststreet1234",
+  },
+  {
+    city: "Zürich",
+    name: "El Lokal",
+    GPS: "129803120983",
+    address: "teststreet1234",
+  },
+  {
+    city: "Zürich",
+    name: "Exil",
+    GPS: "129803120983",
+    address: "teststreet1234",
+  },
+  {
+    city: "Zürich",
+    name: "Hafenkneipe",
+    GPS: "129803120983",
+    address: "teststreet1234",
+  },
+  {
+    city: "Zürich",
+    name: "Helsinki",
+    GPS: "129803120983",
+    address: "teststreet1234",
+  },
+  {
+    city: "Zürich",
+    name: "Kaufleuten",
+    GPS: "129803120983",
+    address: "teststreet1234",
+  },
+  {
+    city: "Zürich",
+    name: "Mascotte",
+    GPS: "129803120983",
+    address: "teststreet1234",
+  },
+  {
+    city: "Zürich",
+    name: "Mehrspur",
+    GPS: "129803120983",
+    address: "teststreet1234",
+  },
+  {
+    city: "Zürich",
+    name: "Moods",
+    GPS: "129803120983",
+    address: "teststreet1234",
+  },
+  {
+    city: "Zürich",
+    name: "Papiersaal",
+    GPS: "129803120983",
+    address: "teststreet1234",
+  },
+  {
+    city: "Zürich",
+    name: "Rote Fabrik",
+    GPS: "129803120983",
+    address: "teststreet1234",
+  },
+  {
+    city: "Zürich",
+    name: "Sender",
+    GPS: "129803120983",
+    address: "teststreet1234",
+  },
+  {
+    city: "Zürich",
+    name: "Stall 6",
+    GPS: "129803120983",
+    address: "teststreet1234",
+  },
+]
 
 
 
-// Location.deleteMany()
-//   .then(() => {
-//     return Location.create(locations)
-//   })
-//   .then(locationsCreated => {
-//     console.log(`${locationsCreated.length} locations created with the following id:`);
-//     console.log(locationsCreated.map(u => u._id));
-//   })
-//   .then(() => {
-//     // Close properly the connection to Mongoose
-//     mongoose.disconnect()
-//   })
-//   .catch(err => {
-//     mongoose.disconnect()
-//     throw err
-//   })
+Location.deleteMany()
+  .then(() => {
+    return Location.create(locations)
+  })
+  .then(locationsCreated => {
+    console.log(`${locationsCreated.length} locations created with the following id:`);
+    console.log(locationsCreated.map(u => u._id));
+  })
+  .then(() => {
+    // Close properly the connection to Mongoose
+    mongoose.disconnect()
+  })
+  .catch(err => {
+    mongoose.disconnect()
+    throw err
+  })
