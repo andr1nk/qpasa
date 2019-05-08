@@ -20,21 +20,26 @@ class Event extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="container">
                 <div>
                     {this.state.events.map(event => {
                         return (
-                            <div key={event._id}>
-                                <h3>Event</h3>
-                                <h3>{event.name}</h3>
-                                <p>{event.description}</p>
-                                <p>{event.url}</p>
-                                <p>{event.date}</p>
-                                <h3>Location</h3>
-                                <p>{event.location.city}</p>
-                                <p>{event.location.name}</p>
-                                <p>{event.location.address}</p>
-                                <p>{event.location.GPS}</p>
+                            <div className="card" key={event._id}>
+                                <div className="card-body">
+                                    <h5 className="card-title">{event.name}</h5>
+                                    <p className="card-text">{event.description}</p>
+                                    <p className="card-text">{event.date}</p>
+                                    <a href={event.url} target="_blank" className="card-link">
+                                        for more details
+                                    </a>
+                                </div>
+                                <div className="card-body">
+                                    <h5 className="card-title">Address</h5>
+                                    <p className="card-text">{event.location.name}</p>
+                                    <p className="card-text">
+                                        {event.location.address}, {event.location.city}
+                                    </p>
+                                </div>
                             </div>
                         )
                     })}
