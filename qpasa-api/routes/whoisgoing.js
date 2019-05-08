@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const User = require('../../../oi/models/User')
-const Event = require('../../../oi/models/Event')
+const User = require('../models/User')
+const Event = require('../models/Event')
 
 router.post('/whoisgoing/:id', (req, res) => {
     const _id = req.params.id

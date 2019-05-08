@@ -11,8 +11,11 @@ const Location = require("../models/Location")
 
 const bcryptSalt = 10;
 
+const mongoDBURL= process.env.NODE_ENV === "development" ?  process.env.MONGO_DEV_URL :  process.env.MONGODB_URI
+
+
 mongoose
-  .connect("mongodb://localhost/qpasa-api", { useNewUrlParser: true })
+  .connect(mongoDBURL, { useNewUrlParser: true })
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -33,35 +36,35 @@ mongoose
 let events = [
   {
     date: "07.05.2019",
-    location: "5cd1ac489f98e31494105f7c",
+    location: "5cd2b4b16cf18c000c6901a0",
     name: "Awesome Techno Party",
     description: "test description",
     url: "http://1nicesevent.com"
   },
   {
     date: "07.05.2019",
-    location: "5cd1ac489f98e31494105f7d",
+    location: "5cd2b4b16cf18c000c6901a1",
     name: "Testparty 1232341",
     description: "test description",
     url: "http://1nicesevent.com"
   },
   {
     date: "07.05.2019",
-    location: "5cd1ac489f98e31494105f7e",
+    location: "5cd2b4b16cf18c000c6901a2",
     name: "Tresorparty",
     description: "test description",
     url: "http://1nicesevent.com"
   },
   {
     date: "07.05.2019",
-    location: "5cd1ac489f98e31494105f7f",
+    location: "5cd2b4b16cf18c000c6901a3",
     name: "Sisyphos Party",
     description: "test description",
     url: "http://1nicesevent.com"
   },
   {
     date: "07.05.2019",
-    location: "5cd1ac489f98e31494105f80",
+    location: "5cd2b4b16cf18c000c6901a3",
     name: "Berhain Party day2",
     description: "test description",
     url: "http://1nicesevent.com"
