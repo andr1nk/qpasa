@@ -249,6 +249,7 @@ const auth = require('./routes/auth')
 app.use('/api', auth)
 
 const whoisgoingRoutes = require('./routes/whoisgoing')
+
 app.use('/api', whoisgoingRoutes)
 
 module.exports = app
