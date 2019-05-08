@@ -26,20 +26,21 @@ class Event extends React.Component {
                         return (
                             <div className="card" key={event._id}>
                                 <div className="card-body">
-                                    <h5 className="card-title">{event.name}</h5>
+                                    <h3 className="card-title">{event.name}</h3>
                                     <p className="card-text">{event.description}</p>
-                                    <p className="card-text">{event.date}</p>
+                                    <p className="card-text">
+                                        <i className="far fa-calendar-alt" />
+                                        {event.date}
+                                    </p>
+                                    <p className="card-text">
+                                        <i class="fas fa-map-marker-alt" /> {event.location.name} <br />
+                                        {event.location.address} <br /> {event.location.city}
+                                    </p>
                                     <a href={event.url} target="_blank" className="card-link">
                                         for more details
                                     </a>
                                 </div>
-                                <div className="card-body">
-                                    <h5 className="card-title">Address</h5>
-                                    <p className="card-text">{event.location.name}</p>
-                                    <p className="card-text">
-                                        {event.location.address}, {event.location.city}
-                                    </p>
-                                </div>
+                                <div className="card-body" />
                             </div>
                         )
                     })}
