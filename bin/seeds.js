@@ -36,35 +36,35 @@ mongoose
 let events = [
   {
     date: "07.05.2019",
-    location: "5cd1ac489f98e31494105f7c",
+    location: "5cd2b4b16cf18c000c6901a0",
     name: "Awesome Techno Party",
     description: "test description",
     url: "http://1nicesevent.com"
   },
   {
     date: "07.05.2019",
-    location: "5cd1ac489f98e31494105f7d",
+    location: "5cd2b4b16cf18c000c6901a1",
     name: "Testparty 1232341",
     description: "test description",
     url: "http://1nicesevent.com"
   },
   {
     date: "07.05.2019",
-    location: "5cd1ac489f98e31494105f7e",
+    location: "5cd2b4b16cf18c000c6901a2",
     name: "Tresorparty",
     description: "test description",
     url: "http://1nicesevent.com"
   },
   {
     date: "07.05.2019",
-    location: "5cd1ac489f98e31494105f7f",
+    location: "5cd2b4b16cf18c000c6901a3",
     name: "Sisyphos Party",
     description: "test description",
     url: "http://1nicesevent.com"
   },
   {
     date: "07.05.2019",
-    location: "5cd1ac489f98e31494105f80",
+    location: "5cd2b4b16cf18c000c6901a3",
     name: "Berhain Party day2",
     description: "test description",
     url: "http://1nicesevent.com"
@@ -88,102 +88,102 @@ Event.deleteMany()
     throw err
   })
 
-let locations = [
-  {
-    city: "Zürich",
-    name: "Bogen F",
-    GPS: "129803120983",
-    address: "teststreet1234",
-  },
-  {
-    city: "Zürich",
-    name: "El Lokal",
-    GPS: "129803120983",
-    address: "teststreet1234",
-  },
-  {
-    city: "Zürich",
-    name: "Exil",
-    GPS: "129803120983",
-    address: "teststreet1234",
-  },
-  {
-    city: "Zürich",
-    name: "Hafenkneipe",
-    GPS: "129803120983",
-    address: "teststreet1234",
-  },
-  {
-    city: "Zürich",
-    name: "Helsinki",
-    GPS: "129803120983",
-    address: "teststreet1234",
-  },
-  {
-    city: "Zürich",
-    name: "Kaufleuten",
-    GPS: "129803120983",
-    address: "teststreet1234",
-  },
-  {
-    city: "Zürich",
-    name: "Mascotte",
-    GPS: "129803120983",
-    address: "teststreet1234",
-  },
-  {
-    city: "Zürich",
-    name: "Mehrspur",
-    GPS: "129803120983",
-    address: "teststreet1234",
-  },
-  {
-    city: "Zürich",
-    name: "Moods",
-    GPS: "129803120983",
-    address: "teststreet1234",
-  },
-  {
-    city: "Zürich",
-    name: "Papiersaal",
-    GPS: "129803120983",
-    address: "teststreet1234",
-  },
-  {
-    city: "Zürich",
-    name: "Rote Fabrik",
-    GPS: "129803120983",
-    address: "teststreet1234",
-  },
-  {
-    city: "Zürich",
-    name: "Sender",
-    GPS: "129803120983",
-    address: "teststreet1234",
-  },
-  {
-    city: "Zürich",
-    name: "Stall 6",
-    GPS: "129803120983",
-    address: "teststreet1234",
-  },
-]
+// let locations = [
+//   {
+//     city: "Zürich",
+//     name: "Bogen F",
+//     GPS: "129803120983",
+//     address: "teststreet1234",
+//   },
+//   {
+//     city: "Zürich",
+//     name: "El Lokal",
+//     GPS: "129803120983",
+//     address: "teststreet1234",
+//   },
+//   {
+//     city: "Zürich",
+//     name: "Exil",
+//     GPS: "129803120983",
+//     address: "teststreet1234",
+//   },
+//   {
+//     city: "Zürich",
+//     name: "Hafenkneipe",
+//     GPS: "129803120983",
+//     address: "teststreet1234",
+//   },
+//   {
+//     city: "Zürich",
+//     name: "Helsinki",
+//     GPS: "129803120983",
+//     address: "teststreet1234",
+//   },
+//   {
+//     city: "Zürich",
+//     name: "Kaufleuten",
+//     GPS: "129803120983",
+//     address: "teststreet1234",
+//   },
+//   {
+//     city: "Zürich",
+//     name: "Mascotte",
+//     GPS: "129803120983",
+//     address: "teststreet1234",
+//   },
+//   {
+//     city: "Zürich",
+//     name: "Mehrspur",
+//     GPS: "129803120983",
+//     address: "teststreet1234",
+//   },
+//   {
+//     city: "Zürich",
+//     name: "Moods",
+//     GPS: "129803120983",
+//     address: "teststreet1234",
+//   },
+//   {
+//     city: "Zürich",
+//     name: "Papiersaal",
+//     GPS: "129803120983",
+//     address: "teststreet1234",
+//   },
+//   {
+//     city: "Zürich",
+//     name: "Rote Fabrik",
+//     GPS: "129803120983",
+//     address: "teststreet1234",
+//   },
+//   {
+//     city: "Zürich",
+//     name: "Sender",
+//     GPS: "129803120983",
+//     address: "teststreet1234",
+//   },
+//   {
+//     city: "Zürich",
+//     name: "Stall 6",
+//     GPS: "129803120983",
+//     address: "teststreet1234",
+//   },
+// ]
 
 
 
-Location.deleteMany()
-  .then(() => {
-    return Location.create(locations)
-  })
-  .then(locationsCreated => {
-    console.log(`${locationsCreated.length} locations created with the following id:`);
-    console.log(locationsCreated.map(u => u._id));
-  })
-  .then(() => {
-    // Close properly the connection to Mongoose
-    mongoose.disconnect()
-  })
-  .catch(err => {
-    mongoose.disconnect()
-    throw err
-  })
+// Location.deleteMany()
+//   .then(() => {
+//     return Location.create(locations)
+//   })
+//   .then(locationsCreated => {
+//     console.log(`${locationsCreated.length} locations created with the following id:`);
+//     console.log(locationsCreated.map(u => u._id));
+//   })
+//   .then(() => {
+//     // Close properly the connection to Mongoose
+//     mongoose.disconnect()
+//   })
+//   .catch(err => {
+//     mongoose.disconnect()
+//     throw err
+//   })
