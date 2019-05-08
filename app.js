@@ -40,10 +40,10 @@ new CronJob(
   //'*/30 * * * * *',
   // Every Day at 6 p.m.
   //'18 * * *',
-  // Every 24h from now on
-  //'*/24 * * *',
-  // Every 5min from now on
-  '*/5 * * * *',
+  // Every 24h at 00:00:00
+  '12,23 * * *',
+  // Every 5min (00:05, 00:10, ...)
+  // '*/5 * * * *',
   function () {
     console.log(`Fetching API and creating events`)
     const dateOfYesterday = moment(new Date())
