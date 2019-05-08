@@ -19,10 +19,10 @@ const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
 const flash = require('connect-flash')
 
-const mongoDBURL= process.env.NODE_ENV === "development" ?  process.env.MONGO_DEV_URL :  process.env.MONGODB_URI
+const mongoDBURL = process.env.NODE_ENV === "development" ? process.env.MONGO_DEV_URL : process.env.MONGODB_URI
 
 mongoose
-  .connect(mongoDBURL, {useNewUrlParser: true})
+  .connect(mongoDBURL, { useNewUrlParser: true })
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -36,28 +36,36 @@ const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.
 const app = express()
 
 new CronJob(
-    //12 : '00 00 12 * * *'
-    // One minute: 0 */1 * * * *
-    '0 0 */18 * * *',
-    function() {
-        console.log(`Hello`)
-        const dateOfYesterday = moment(new Date())
-            .subtract(1, 'day')
-            .format('DD.MM.YYYY')
+  // Every 10 seconds: 
+  //'*/30 * * * * *',
+  // Every Day at 6 p.m.
+  //'18 * * *',
+  // Every 24h from now on
+  //'*/24 * * *',
+  // Every 5min from now on
+  '*/5 * * * *',
+  function () {
+    console.log(`Fetching API and creating events`)
+    const dateOfYesterday = moment(new Date())
+      .subtract(1, 'day')
+      .format('DD.MM.YYYY')
 
-        Event.deleteMany({ date: dateOfYesterday })
-            .then()
-            .catch(err => {
-                console.error(err)
-            })
+    Event.deleteMany({ date: dateOfYesterday })
+      .then(() => {
+        console.log("deleted events from yesterday")
+      })
+      .catch(err => {
+        console.error(err)
+      })
 
-        // Event.deleteMany({})
-        //     .then(() => {
-        //         console.log('All events deleted')
-        //     })
-        //     .catch(err => console.error(err))
+    // EMPTY EVENT DATABASE
+    Event.deleteMany({})
+        .then(() => {
+            console.log('All events deleted')
+        })
+        .catch(err => console.error(err))
 
-        const query = `{
+    const query = `{
             allFutureEvents(city: "Zürich") {
               date
               locationName
@@ -69,111 +77,138 @@ new CronJob(
                }
             }`
 
-        request('https://api.heute.sg/graphql', query)
-            .then(data => {
-                //If events for today and tomorrow want to be created
-                const dateOfToday = moment(new Date()).format('DD.MM.YYYY')
-                const dateOfTomorrow = moment(new Date())
-                    .add(1, 'day')
-                    .format('DD.MM.YYYY')
-                const eventsOfTodayArr = data.allFutureEvents.filter(el => {
-                    if (el.date === dateOfToday) return el
-                })
+    request('https://api.heute.sg/graphql', query)
+      .then(data => {
 
-                eventsOfTodayArr.forEach(el => {
-                    const date = el.date
-                    const event = el.details.title
-                    const location = el.locationName
-                    const description = el.details.description
-                    Location.find({ name: location })
-                        .then(oneLocation => {
-                            if (oneLocation[0]) {
-                                let locationId = oneLocation[0]._id
+        //date variables for today, tomorrow and day after tomorrow
 
-                                // Event.create({ date, event, description, location: locationId })
-                                //     .then(() => {
-                                //         console.log('Event created for today: ', event)
-                                //     })
-                                //     .catch(err => {
-                                //         console.error(err)
-                                //     })
-                            }
+        const dateToday = moment(new Date())
+          .format('DD.MM.YYYY')
+
+        const dateTomorrow = moment(new Date())
+          .add(1, 'day')
+          .format('DD.MM.YYYY')
+
+        const dateDayAfterTomorrow = moment(new Date())
+          .add(2, 'day')
+          .format('DD.MM.YYYY')
+
+
+        //create events for today (only needed for inital seeding)
+
+        const eventsTodayArr = data.allFutureEvents.filter(el => {
+          if (el.date === dateToday) return el
+        })
+
+        eventsTodayArr.forEach(event => {
+          // console.log("element of eventsTodayArray:")
+          // console.log(event)
+          const date = event.date
+          const name = event.details.title
+          const location = event.locationName
+          const {description, url} = event.details
+
+          //check if event is in database
+          Event.find({ $and: [{ name: name }, { date: date }]})
+          .then (duplicateEvent => {
+            console.log(duplicateEvent)
+            if (duplicateEvent.length > 0) {
+              console.log("IF")
+              console.log(`Event ${name} for date ${date} already in database`)
+              } else {
+                console.log("ELSE")
+                Location.find({ name: location })
+                  .then(oneLocation => {
+                    if (oneLocation.length !== 1) { // check if there is NOT one event for the location
+                      console.log("Event not created")
+                    } else {
+                      let locationId = oneLocation[0]._id
+                      Event.create({ date, url, name, description, location: locationId })
+                        .then(() => {
+                          // console.log('Event created for today: ', event)
                         })
                         .catch(err => {
-                            console.error(err)
+                          console.error(err)
                         })
-                })
-
-                const eventsOfTomorrowArr = data.allFutureEvents.filter(el => {
-                    if (el.date === dateOfTomorrow) return el
-                })
-
-                eventsOfTomorrowArr.forEach(el => {
-                    const date = el.date
-                    const event = el.details.title
-                    const location = el.locationName
-                    const description = el.details.description
-                    Location.find({ name: location })
-                        .then(oneLocation => {
-                            if (oneLocation[0]) {
-                                let locationId = oneLocation[0]._id
-
-                                // Event.create({ date, event, description, location: locationId })
-                                //     .then(() => {
-                                //         console.log('Event created for tomorrow: ', event)
-                                //     })
-                                //     .catch(err => {
-                                //         console.error(err)
-                                //     })
-                            }
-                        })
-                        .catch(err => {
-                            console.error(err)
-                        })
-                })
-
-                //Creation of after tomorrow events
-                const dateAfterThreeDays = moment(new Date())
-                    .add(2, 'day')
-                    .format('DD.MM.YYYY')
-
-                const eventsAfterThreeDaysArr = data.allFutureEvents.filter(el => {
-                    if (el.date === dateAfterThreeDays) return el
-                })
-
-                eventsAfterThreeDaysArr.forEach(el => {
-                    const date = el.date
-                    const event = el.details.title
-                    const location = el.locationName
-                    const description = el.details.description
-                    console.log(date)
-                    Location.find({ name: location })
-                        .then(oneLocation => {
-                            if (oneLocation[0]) {
-                                let locationId = oneLocation[0]._id
-
-                                Event.create({ date, event, description, location: locationId })
-                                    .then(() => {
-                                        console.log('Event created for after tomorrow: ', event)
-                                    })
-                                    .catch(err => {
-                                        console.error(err)
-                                    })
-                            }
-                        })
-                        .catch(err => {
-                            console.error(err)
-                        })
-                })
+                    }
+                  })
+                  .catch(err => {
+                    console.error(err)
+                  })
+              }
             })
+        })
 
-            .catch(err => {
-                console.error(err)
-            })
-    },
-    null,
-    true,
-    'America/Los_Angeles'
+
+        //create events for tomorrow (only needed on inital seeding)
+
+        const eventsTomorrowArr = data.allFutureEvents.filter(el => {
+          if (el.date === dateTomorrow) return el
+        })
+
+        // eventsTomorrowArr.forEach(el => {
+        //   const date = el.date
+        //   const event = el.details.title
+        //   const location = el.locationName
+        //   const description = el.details.description
+        //   Location.find({ name: location })
+        //     .then(oneLocation => {
+        //       if (oneLocation[0]) {
+        //         let locationId = oneLocation[0]._id
+
+        //         // Event.create({ date, event, description, location: locationId })
+        //         //     .then(() => {
+        //         //         console.log('Event created for tomorrow: ', event)
+        //         //     })
+        //         //     .catch(err => {
+        //         //         console.error(err)
+        //         //     })
+        //       }
+        //     })
+        //     .catch(err => {
+        //       console.error(err)
+        //     })
+        // })
+
+        //create events for day after tomorrow (needs to run for constant update)
+
+        const eventsDayAfterTomorrowArr = data.allFutureEvents.filter(el => {
+          if (el.date === dateDayAfterTomorrow) return el
+        })
+
+        // eventsDayAfterTomorrowArr.forEach(el => {
+        //   const date = el.date
+        //   const event = el.details.title
+        //   const location = el.locationName
+        //   const description = el.details.description
+        //   console.log(date)
+        //   Location.find({ name: location })
+        //     .then(oneLocation => {
+        //       if (oneLocation[0]) {
+        //         let locationId = oneLocation[0]._id
+
+        //         Event.create({ date, event, description, location: locationId })
+        //           .then(() => {
+        //             console.log('Event created for after tomorrow: ', event)
+        //           })
+        //           .catch(err => {
+        //             console.error(err)
+        //           })
+        //       }
+        //     })
+        //     .catch(err => {
+        //       console.error(err)
+        //     })
+        // })
+      })
+
+      .catch(err => {
+        console.error(err)
+      })
+  },
+  null,
+  true,
+  'Europe/Berlin'
 )
 
 // request('https://api.heute.sg/graphql', query)
@@ -193,11 +228,11 @@ app.use(cookieParser())
 // Express View engine setup
 
 app.use(
-    require('node-sass-middleware')({
-        src: path.join(__dirname, 'public'),
-        dest: path.join(__dirname, 'public'),
-        sourceMap: true
-    })
+  require('node-sass-middleware')({
+    src: path.join(__dirname, 'public'),
+    dest: path.join(__dirname, 'public'),
+    sourceMap: true
+  })
 )
 
 app.set('views', path.join(__dirname, 'views'))
@@ -206,12 +241,12 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')))
 
 hbs.registerHelper('ifUndefined', (value, options) => {
-    if (arguments.length < 2) throw new Error('Handlebars Helper ifUndefined needs 1 parameter')
-    if (typeof value !== undefined) {
-        return options.inverse(this)
-    } else {
-        return options.fn(this)
-    }
+  if (arguments.length < 2) throw new Error('Handlebars Helper ifUndefined needs 1 parameter')
+  if (typeof value !== undefined) {
+    return options.inverse(this)
+  } else {
+    return options.fn(this)
+  }
 })
 
 // default value for title local
@@ -219,12 +254,12 @@ hbs.registerHelper('ifUndefined', (value, options) => {
 
 // Enable authentication using session + passport
 app.use(
-    session({
-        secret: 'irongenerator',
-        resave: true,
-        saveUninitialized: true,
-        store: new MongoStore({ mongooseConnection: mongoose.connection })
-    })
+  session({
+    secret: 'irongenerator',
+    resave: true,
+    saveUninitialized: true,
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
+  })
 )
 app.use(flash())
 require('./passport')(app)
