@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import Navbar from './Navbar'
 
 class Event extends React.Component {
     state = {
@@ -20,8 +21,9 @@ class Event extends React.Component {
 
     render() {
         return (
-            <div className="container">
-                <div>
+            <div>
+                <Navbar />
+                <div className="container">
                     {this.state.events.map(event => {
                         return (
                             <div className="card" key={event._id}>
