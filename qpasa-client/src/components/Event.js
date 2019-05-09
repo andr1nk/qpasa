@@ -36,21 +36,21 @@ class Event extends React.Component {
 
                                     <p>
                                         <button
-                                            class="btn btn-outline-dark"
+                                            className="btn btn-primary"
                                             type="button"
                                             data-toggle="collapse"
-                                            data-target="#item"
+                                            data-target={`#item-${event._id.toString()}`}
                                             aria-expanded="false"
-                                            aria-controls="item"
+                                            aria-controls={`item-${event._id.toString()}`}
                                         >
                                             More details
                                         </button>
                                     </p>
-                                    <div className="collapse" id="item">
+                                    <div className="collapse" id={`item-${event._id.toString()}`}>
                                         <div className="card card-body">
                                             <p className="card-text">{event.description}</p>
                                             <p className="card-text">
-                                                <i class="fas fa-map-marker-alt" /> {event.location.name} <br />
+                                                <i className="fas fa-map-marker-alt" /> {event.location.name} <br />
                                                 {event.location.address} <br /> {event.location.city}
                                             </p>
                                             <a href={event.url} target="_blank" className="card-link">
