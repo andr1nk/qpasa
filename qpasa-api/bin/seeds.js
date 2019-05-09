@@ -34,60 +34,60 @@ mongoose
 //     password: bcrypt.hashSync("bob", bcrypt.genSaltSync(bcryptSalt)),
 //   }
 
-let events = [
-  {
-    date: "07.05.2019",
-    location: "5cd2b4b16cf18c000c6901a0",
-    name: "Awesome Techno Party",
-    description: "test description",
-    url: "http://1nicesevent.com"
-  },
-  {
-    date: "07.05.2019",
-    location: "5cd2b4b16cf18c000c6901a1",
-    name: "Testparty 1232341",
-    description: "test description",
-    url: "http://1nicesevent.com"
-  },
-  {
-    date: "07.05.2019",
-    location: "5cd2b4b16cf18c000c6901a2",
-    name: "Tresorparty",
-    description: "test description",
-    url: "http://1nicesevent.com"
-  },
-  {
-    date: "07.05.2019",
-    location: "5cd2b4b16cf18c000c6901a3",
-    name: "Sisyphos Party",
-    description: "test description",
-    url: "http://1nicesevent.com"
-  },
-  {
-    date: "07.05.2019",
-    location: "5cd2b4b16cf18c000c6901a3",
-    name: "Berhain Party day2",
-    description: "test description",
-    url: "http://1nicesevent.com"
-  }
-]
+// let events = [
+//   {
+//     date: "07.05.2019",
+//     location: "5cd2b4b16cf18c000c6901a0",
+//     name: "Awesome Techno Party",
+//     description: "test description",
+//     url: "http://1nicesevent.com"
+//   },
+//   {
+//     date: "07.05.2019",
+//     location: "5cd2b4b16cf18c000c6901a1",
+//     name: "Testparty 1232341",
+//     description: "test description",
+//     url: "http://1nicesevent.com"
+//   },
+//   {
+//     date: "07.05.2019",
+//     location: "5cd2b4b16cf18c000c6901a2",
+//     name: "Tresorparty",
+//     description: "test description",
+//     url: "http://1nicesevent.com"
+//   },
+//   {
+//     date: "07.05.2019",
+//     location: "5cd2b4b16cf18c000c6901a3",
+//     name: "Sisyphos Party",
+//     description: "test description",
+//     url: "http://1nicesevent.com"
+//   },
+//   {
+//     date: "07.05.2019",
+//     location: "5cd2b4b16cf18c000c6901a3",
+//     name: "Berhain Party day2",
+//     description: "test description",
+//     url: "http://1nicesevent.com"
+//   }
+// ]
 
-Event.deleteMany()
-  .then(() => {
-    return Event.create(events)
-  })
-  .then(eventsCreated => {
-    console.log(`${eventsCreated.length} events created with the following id:`);
-    console.log(eventsCreated.map(u => u._id));
-  })
-  .then(() => {
-    // Close properly the connection to Mongoose
-    mongoose.disconnect()
-  })
-  .catch(err => {
-    mongoose.disconnect()
-    throw err
-  })
+// Event.deleteMany()
+//   .then(() => {
+//     return Event.create(events)
+//   })
+//   .then(eventsCreated => {
+//     console.log(`${eventsCreated.length} events created with the following id:`);
+//     console.log(eventsCreated.map(u => u._id));
+//   })
+//   .then(() => {
+//     // Close properly the connection to Mongoose
+//     mongoose.disconnect()
+//   })
+//   .catch(err => {
+//     mongoose.disconnect()
+//     throw err
+//   })
 
 let locations = [
   {
