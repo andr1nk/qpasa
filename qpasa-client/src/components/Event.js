@@ -29,20 +29,36 @@ class Event extends React.Component {
                             <div className="card" key={event._id}>
                                 <div className="card-body">
                                     <h3 className="card-title">{event.name}</h3>
-                                    <p className="card-text">{event.description}</p>
                                     <p className="card-text">
                                         <i className="far fa-calendar-alt" />
                                         {event.date}
                                     </p>
-                                    <p className="card-text">
-                                        <i class="fas fa-map-marker-alt" /> {event.location.name} <br />
-                                        {event.location.address} <br /> {event.location.city}
+
+                                    <p>
+                                        <button
+                                            class="btn btn-outline-dark"
+                                            type="button"
+                                            data-toggle="collapse"
+                                            data-target="#item"
+                                            aria-expanded="false"
+                                            aria-controls="item"
+                                        >
+                                            More details
+                                        </button>
                                     </p>
-                                    <a href={event.url} target="_blank" className="card-link">
-                                        for more details
-                                    </a>
+                                    <div className="collapse" id="item">
+                                        <div className="card card-body">
+                                            <p className="card-text">{event.description}</p>
+                                            <p className="card-text">
+                                                <i class="fas fa-map-marker-alt" /> {event.location.name} <br />
+                                                {event.location.address} <br /> {event.location.city}
+                                            </p>
+                                            <a href={event.url} target="_blank" className="card-link">
+                                                go to page
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="card-body" />
                             </div>
                         )
                     })}
