@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import Navbar from './components/Navbar'
+import Navbar from './Navbar'
 
 class Event extends React.Component {
     state = {

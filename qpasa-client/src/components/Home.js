@@ -1,5 +1,6 @@
 import React from 'react'
 import './Home.css'
+import { Link } from 'react-router-dom'
 
 class Home extends React.Component {
     render() {
@@ -19,8 +20,10 @@ class Home extends React.Component {
                         ipsum dolor sit amet.
                     </p>
                     <div className="buttons">
+                        <Link to="/events-zurich">
+                            <button className="btn btn-lg btn-outline-dark button">Zürich</button>
+                        </Link>
                         <button className="btn btn-lg btn-outline-dark button">Berlin</button>
-                        <button className="btn btn-lg btn-outline-dark button">Zürich</button>
                     </div>
                 </div>
             </div>
