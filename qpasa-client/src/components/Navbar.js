@@ -4,7 +4,7 @@ class Navbar extends React.Component {
     render() {
         return (
             <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-                <a className="navbar-brand" href="#">
+                <a className="navbar-brand" href="/">
                     Q'pasa
                 </a>
                 <button
@@ -21,13 +21,18 @@ class Navbar extends React.Component {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item active">
-                            <a className="nav-link" href="#">
+                            <a className="nav-link" href="/">
                                 Home <span className="sr-only">(current)</span>
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
-                                Features
+                            <a className="nav-link" href="/events-zurich">
+                                Zürich
+                            </a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/events-berlin">
+                                Berlin
                             </a>
                         </li>
                     </ul>
