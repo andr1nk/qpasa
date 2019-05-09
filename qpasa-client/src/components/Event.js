@@ -36,7 +36,7 @@ class Event extends React.Component {
 
                                     <p>
                                         <button
-                                            className="btn btn-primary"
+                                            className="btn btn-outline-dark"
                                             type="button"
                                             data-toggle="collapse"
                                             data-target={`#item-${event._id.toString()}`}
