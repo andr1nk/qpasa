@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import Navbar from './Navbar'
+import './Event.css'
 
 class Event extends React.Component {
     state = {
@@ -23,10 +24,10 @@ class Event extends React.Component {
         return (
             <div>
                 <Navbar />
-                <div className="container">
+                <div className="container event-container">
                     {this.state.events.map(event => {
                         return (
-                            <div className="card" key={event._id}>
+                            <div className="card event-card" key={event._id}>
                                 <div className="card-body">
                                     <h3 className="card-title">{event.name}</h3>
                                     <p className="card-text">
