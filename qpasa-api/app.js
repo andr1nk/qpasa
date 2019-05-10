@@ -15,6 +15,8 @@ const { request } = require('graphql-request')
 const moment = require('moment')
 const cors = require("cors")
 
+const { scrapeBerlinDay1, scrapeBerlinDay2, scrapeBerlinDay3, scrapeBerlinDay4, scrapeBerlinDay5, scrapeBerlinDay6, scrapeBerlinDay7 } = require("./scraper/scraperBerlin")
+
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
 const flash = require('connect-flash')
@@ -35,15 +37,24 @@ const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.
 
 const app = express()
 
+const day0 = moment(new Date()).subtract(1, 'day').format('DD.MM.YYYY') // Yesterday
+const day1 = moment(new Date()).format('DD.MM.YYYY')                    // Today
+const day2 = moment(new Date()).add(1, 'day').format('DD.MM.YYYY')      // Tomorrow
+const day3 = moment(new Date()).add(2, 'day').format('DD.MM.YYYY')      // ...
+const day4 = moment(new Date()).add(3, 'day').format('DD.MM.YYYY')      // ...
+const day5 = moment(new Date()).add(4, 'day').format('DD.MM.YYYY')      // ...
+const day6 = moment(new Date()).add(5, 'day').format('DD.MM.YYYY')      // ...
+const day7 = moment(new Date()).add(6, 'day').format('DD.MM.YYYY')      // ...
+
 new CronJob(
   // Every 10 seconds: 
   // '*/30 * * * * *',
   // Every Day at 6 p.m.
   //'18 * * *',
   // Dayly at 12am and 11PM
-  // '12,23 * * *',
+  '12,23 * * *',
   // Every 5min (00:05, 00:10, ...)
-  '*/5 * * * *',
+  // '*/5 * * * *',
   function () {
 
     console.log(`CronJob executed`)
@@ -55,17 +66,6 @@ new CronJob(
     //     })
     //     .catch(err => console.error(err))
 
-
-    const day0 = moment(new Date()).subtract(1, 'day').format('DD.MM.YYYY') // Yesterday
-    const day1 = moment(new Date()).format('DD.MM.YYYY')                    // Today
-    const day2 = moment(new Date()).add(1, 'day').format('DD.MM.YYYY')      // Tomorrow
-    const day3 = moment(new Date()).add(2, 'day').format('DD.MM.YYYY')      // ...
-    const day4 = moment(new Date()).add(3, 'day').format('DD.MM.YYYY')      // ...
-    const day5 = moment(new Date()).add(4, 'day').format('DD.MM.YYYY')      // ...
-    const day6 = moment(new Date()).add(5, 'day').format('DD.MM.YYYY')      // ...
-    const day7 = moment(new Date()).add(6, 'day').format('DD.MM.YYYY')      // ...
-    
-    
     // Delete events of yesterday from the database
     Event.deleteMany({ date: day0 })
       .then(() => {
@@ -74,6 +74,67 @@ new CronJob(
       .catch(err => {
         console.error(err)
       })
+
+
+    // Create Events from scraperBerlin
+
+    createEventsScraperBerlin = (scrapeBerlinDay, day) => {
+      scrapeBerlinDay
+        .then(events => {
+            console.log(`Berlin events creation for ${day}`)
+            const eventsOfDayArray = events.filter(el => {
+              if (el.date === day) return el
+            })
+
+            eventsOfDayArray.forEach(event => {
+
+              const { city, eventName, locationName, description, date, url } = event
+              // console.log(event)
+              //check if event is in database
+              Event.find({ $and: [{ name: eventName }, { date: date }] })
+                .then(duplicateEvent => {
+                  if (duplicateEvent.length > 0) {
+                    console.log(`Event ${eventName} for date ${date} already in database`)
+                  } else {
+                    // Upon event creation, find the location of event in our Location databse
+                    Location.find({ name: locationName })
+                      .then(oneLocation => {
+                        // console.log(oneLocation)
+                        if (oneLocation.length !== 1) {
+                          // console.log("Event not created, probably unknown location")
+                        } else {
+                          // create event            
+                          let locationId = oneLocation[0]._id
+                          Event.create({ date, url, name: eventName, description, location: locationId })
+                            .then(() => {
+                              // console.log('Event created for today: ', event)
+                            })
+                            .catch(err => {
+                              console.error(err)
+                            })
+                        }
+                      })
+                      .catch(err => {
+                        console.error(err)
+                      })
+                  }
+                })
+            })
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    }
+
+    createEventsScraperBerlin(scrapeBerlinDay1, day1)
+    createEventsScraperBerlin(scrapeBerlinDay2, day2)
+    createEventsScraperBerlin(scrapeBerlinDay3, day3)
+    createEventsScraperBerlin(scrapeBerlinDay4, day4)
+    createEventsScraperBerlin(scrapeBerlinDay5, day5)
+    createEventsScraperBerlin(scrapeBerlinDay6, day6)
+    createEventsScraperBerlin(scrapeBerlinDay7, day7)
+
+    // Create Events from HEUTE.SG API
 
     // Define query for api.heute.sg API
     const query = `{
@@ -93,13 +154,13 @@ new CronJob(
 
         // Function to create events in our database
         createEvents = (day) => {
-          //console.log(`events creation for ${day}`)
+          console.log(`Züri events creation for ${day}`)
           const eventsOfDayArray = data.allFutureEvents.filter(el => {
             if (el.date === day) return el
           })
 
           eventsOfDayArray.forEach(event => {
-  
+
             const { date, locationName } = event
             const { title, description, url } = event.details
 
@@ -107,15 +168,15 @@ new CronJob(
             Event.find({ $and: [{ name: title }, { date: date }] })
               .then(duplicateEvent => {
                 if (duplicateEvent.length > 0) {
-                  // console.log(`Event ${title} for date ${date} already in database`)
+                  console.log(`Event ${title} for date ${date} already in database`)
                 } else {
-            // Upon event creation, find the location of event in our Location databse
+                  // Upon event creation, find the location of event in our Location databse
                   Location.find({ name: locationName })
                     .then(oneLocation => {
-                      if (oneLocation.length !== 1) { 
+                      if (oneLocation.length !== 1) {
                         // console.log("Event not created, probably unknown location")
-                      } else { 
-            // create event            
+                      } else {
+                        // create event            
                         let locationId = oneLocation[0]._id
                         Event.create({ date, url, name: title, description, location: locationId })
                           .then(() => {
@@ -152,6 +213,8 @@ new CronJob(
   true,
   'Europe/Berlin'
 )
+
+
 
 // request('https://api.heute.sg/graphql', query)
 //     .then(data => {
