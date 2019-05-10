@@ -66,11 +66,13 @@ class App extends React.Component {
                             <LocationDetails {...props} user={this.state.loggedIn} />
                         )}
                     />
-                    <ProtectedRoute
-                        user={this.state.loggedIn}
-                        component={LocationList}
+                    <Route
                         exact={true}
                         path="/locations"
+                        user={this.state.loggedIn}
+                        render={props => (
+                            <LocationList {...props} user={this.state.loggedIn}/>
+                        )}
                     />
                 </Switch>
                 <Footer />

@@ -19,27 +19,38 @@ class LocationList extends React.Component {
       });
   };
 
+
+
   componentDidMount() {
     this.getData();
   }
 
   render() {
-    console.log(this.state.locations)
     return (
-      <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+      <div style={{ display: "flex", justifyContent: "space-evenly", margin: '70px' }}>
         <div>
           {this.state.locations.map(location => {
             return (
               <div key={location._id}>
-                <h1>{location.city}</h1>
-                <p>{location.name}</p>
-                {/* <p>{location.GPS.lat}</p>
-                <p>{location.GPS.long}</p> */}
-                <p>{location.adress}</p>
-                <br/>
+                <div>
+                  <h1>city: {location.city}</h1>
+                  <p>name: {location.name}</p>
+                  <p>GPS lat: {location.GPS.lat}</p>
+                  <p>GPS long: {location.GPS.long}</p>
+                  <p>address: {location.address}</p>
+                  <br />
+                </div>
+                <div>
+                  <Link to={`/locations/${location._id}`} className="nav-link">
+                    Update / Delete Location
+                  </Link>
+                </div>
               </div>
             );
           })}
+          <div>
+            <AddLocation props={this.props} getData={this.getData} />
+          </div>
         </div>
       </div>
     );

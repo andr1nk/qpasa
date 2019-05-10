@@ -1,81 +1,75 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import EditLocation from './Edit'
 
 class LocationDetails extends React.Component {
   state = {
-    project: {}
+    location: {}
   };
 
-  // getProject = () => {
-  //   const id = this.props.match.params.id;
+  getLocation = () => {
+    const id = this.props.match.params.id;
 
-  //   axios
-  //     .get(`http://localhost:5000/api/projects/${id}`, {
-  //       withCredentials: true
-  //     })
-  //     .then(response => {
-  //       this.setState({
-  //         project: response.data
-  //       });
-  //     });
-  // };
+    axios
+      .get(`http://localhost:5000/api/locations/${id}`, {
+        withCredentials: true
+      })
+      .then(response => {
+        this.setState({
+          location: response.data
+        });
+      });
+  };
 
-  // deleteProject = () => {
-  //   const id = this.props.match.params.id;
+  deleteLocation = () => {
+    console.log('delete method called')
+    const id = this.props.match.params.id;
 
-  //   axios.delete(`http://localhost:5000/api/projects/${id}`).then(response => {
-  //     // redirects to /projects
-  //     this.props.history.push("/projects");
-  //   });
-  // };
+    axios.delete(`http://localhost:5000/api/locations/${id}`).then(response => {
+      // redirects to /projects
+      this.props.history.push("/locations");
+    });
+  };
 
-  // componentDidMount() {
-  //   this.getProject();
-  // }
+  componentDidMount() {
+    this.getLocation();
+  }
 
   render() {
-    // const { project } = this.state;
-    // console.log(this.props);
+    const { location } = this.state;
+    let editBlock = <></>;
 
-    // let editBlock = <></>;
-
-    // if (this.props.user && this.props.user._id === project.owner) {
-    //   editBlock = (
-    //     <div>
-    //       <EditProject project={project} getDetails={this.getProject} />
-    //       <button
-    //         style={{ marginTop: "10px" }}
-    //         className="btn btn-danger"
-    //         onClick={this.deleteProject}
-    //       >
-    //         Delete project
-    //       </button>
-    //     </div>
-    //   );
-    // }
+      editBlock = (
+        <div>
+          <EditLocation location={location} getDetails={this.getLocation} />
+          <button
+            style={{ marginTop: "10px" }}
+            className="btn btn-danger"
+            onClick={this.deleteLocation}
+          >
+            Delete Location
+          </button>
+        </div>
+      );
 
     return (
-      <div>
-        {/* <h1>{project.title}</h1>
-        <p>{project.description}</p>
+      <div style={{ margin: '70px' }}>
+        <h1>{location.city}</h1>
+        <p>{location.name}</p>
 
-        {project.tasks && project.tasks.length > 0 && <h3>Tasks</h3>}
-        {project.tasks &&
-          project.tasks.map(task => {
+        {location.tasks && location.tasks.length > 0 && <h3>Tasks</h3>}
+        {location.tasks &&
+          location.tasks.map(task => {
             return (
               <div key={task._id}>
                 <Link to={`/tasks/${task._id}`}>{task.title}</Link>
               </div>
             );
           })}
-
         {editBlock}
-
-        <AddTask project={project} getProject={this.getProject} />
         <br />
-
-        <Link to="/projects">Back</Link> */}
+        <Link to="/projects">Back</Link>
       </div>
     );
   }
