@@ -273,7 +273,8 @@ require('./passport')(app)
 
 app.use(
   cors({
-    origin: "http://localhost:3000"
+    origin: "http://localhost:3000",
+    credentials: true
   })
 );
 
@@ -284,6 +285,9 @@ app.use("/", index);
 
 const events = require("./routes/events");
 app.use("/api", events);
+
+const locations = require("./routes/locations");
+app.use("/api", locations);
 
 const auth = require('./routes/auth')
 app.use('/api', auth)
