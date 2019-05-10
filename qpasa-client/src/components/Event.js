@@ -32,7 +32,6 @@ class Event extends React.Component {
     render() {
         return (
             <div>
-                <Navbar />
                 <div className="container event-container">
                     {this.state.events.map(event => {
                         return (
