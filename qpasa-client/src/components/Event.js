@@ -26,7 +26,6 @@ class Event extends React.Component {
     showMapHandler = eventId => {
         console.log('holandow')
         this.setState({
-            // isMapShow: !this.state.isMapShow,
             currentMap: eventId
         })
     }
