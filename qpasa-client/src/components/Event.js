@@ -7,7 +7,6 @@ import './Event.css'
 class Event extends React.Component {
     state = {
         events: [],
-        isMapShow: false,
         currentMap: null
     }
 
@@ -31,7 +30,6 @@ class Event extends React.Component {
     }
 
     render() {
-        console.log(this.state.isMapShow)
         return (
             <div>
                 <Navbar />
@@ -61,15 +59,26 @@ class Event extends React.Component {
                                     </p>
                                     <div className="collapse" id={`item-${event._id.toString()}`}>
                                         <div className="card card-body">
-                                            <p className="card-text">{event.description}</p>
-                                            <p className="card-text">
-                                                <i className="fas fa-map-marker-alt" /> {event.location.name} <br />
-                                                {event.location.address} <br /> {event.location.city}
-                                            </p>
-                                            <a href={event.url} target="_blank" className="card-link">
-                                                go to page
-                                            </a>
-                                            {event._id === this.state.currentMap && <div>{<Location />}</div>}
+                                            <div className="container">
+                                                <div className="row">
+                                                    <div className="col-md-6">
+                                                        <p className="card-text">{event.description}</p>
+                                                        <p className="card-text">
+                                                            <i className="fas fa-map-marker-alt" />{' '}
+                                                            {event.location.name} <br />
+                                                            {event.location.address} <br /> {event.location.city}
+                                                        </p>
+                                                        <a href={event.url} target="_blank" className="card-link">
+                                                            go to page
+                                                        </a>
+                                                    </div>
+                                                    <div className="col-md-6">
+                                                        {event._id === this.state.currentMap && (
+                                                            <div>{<Location />}</div>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
