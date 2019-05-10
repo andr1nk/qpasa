@@ -1,11 +1,13 @@
 import React from 'react'
 import axios from 'axios'
 import Navbar from './Navbar'
+import Location from './Location'
 import './Event.css'
 
 class Event extends React.Component {
     state = {
-        events: []
+        events: [],
+        currentMap: null
     }
 
     fetchData = () => {
@@ -18,6 +20,13 @@ class Event extends React.Component {
 
     componentDidMount() {
         this.fetchData()
+    }
+
+    showMapHandler = eventId => {
+        console.log('holandow')
+        this.setState({
+            currentMap: eventId
+        })
     }
 
     render() {
@@ -37,6 +46,7 @@ class Event extends React.Component {
 
                                     <p>
                                         <button
+                                            onClick={() => this.showMapHandler(event._id)}
                                             className="btn btn-outline-dark"
                                             type="button"
                                             data-toggle="collapse"
@@ -49,14 +59,26 @@ class Event extends React.Component {
                                     </p>
                                     <div className="collapse" id={`item-${event._id.toString()}`}>
                                         <div className="card card-body">
-                                            <p className="card-text">{event.description}</p>
-                                            <p className="card-text">
-                                                <i className="fas fa-map-marker-alt" /> {event.location.name} <br />
-                                                {event.location.address} <br /> {event.location.city}
-                                            </p>
-                                            <a href={event.url} target="_blank" className="card-link">
-                                                go to page
-                                            </a>
+                                            <div className="container">
+                                                <div className="row">
+                                                    <div className="col-md-6">
+                                                        <p className="card-text">{event.description}</p>
+                                                        <p className="card-text">
+                                                            <i className="fas fa-map-marker-alt" />{' '}
+                                                            {event.location.name} <br />
+                                                            {event.location.address} <br /> {event.location.city}
+                                                        </p>
+                                                        <a href={event.url} target="_blank" className="card-link">
+                                                            go to page
+                                                        </a>
+                                                    </div>
+                                                    <div className="col-md-6">
+                                                        {event._id === this.state.currentMap && (
+                                                            <div>{<Location />}</div>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
