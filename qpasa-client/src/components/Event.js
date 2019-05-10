@@ -1,11 +1,14 @@
 import React from 'react'
 import axios from 'axios'
 import Navbar from './Navbar'
+import Location from './Location'
 import './Event.css'
 
 class Event extends React.Component {
     state = {
-        events: []
+        events: [],
+        isMapShow: false,
+        currentMap: null
     }
 
     fetchData = () => {
@@ -20,7 +23,16 @@ class Event extends React.Component {
         this.fetchData()
     }
 
+    showMapHandler = eventId => {
+        console.log('holandow')
+        this.setState({
+            // isMapShow: !this.state.isMapShow,
+            currentMap: eventId
+        })
+    }
+
     render() {
+        console.log(this.state.isMapShow)
         return (
             <div>
                 <Navbar />
@@ -37,6 +49,7 @@ class Event extends React.Component {
 
                                     <p>
                                         <button
+                                            onClick={() => this.showMapHandler(event._id)}
                                             className="btn btn-outline-dark"
                                             type="button"
                                             data-toggle="collapse"
@@ -57,6 +70,7 @@ class Event extends React.Component {
                                             <a href={event.url} target="_blank" className="card-link">
                                                 go to page
                                             </a>
+                                            {event._id === this.state.currentMap && <div>{<Location />}</div>}
                                         </div>
                                     </div>
                                 </div>
