@@ -16,7 +16,7 @@ class Location extends React.Component {
         console.log(this.state)
         return (
             <ReactMapGL
-                mapboxApiAccessToken= //TODO: as enviroment variable process.env.MAPBOX_ACCESS_TOK
+                mapboxApiAccessToken={process.env.MAPBOX_ACCESS_TOKE}
                 {...this.state.viewport}
                 onViewportChange={viewport => this.setState({ viewport })}
             >
