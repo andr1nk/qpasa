@@ -1,7 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import Navbar from './Navbar'
-import Location from './Location'
+import Map from './Map'
 import './Event.css'
 
 class Event extends React.Component {
@@ -72,9 +71,7 @@ class Event extends React.Component {
                                                         </a>
                                                     </div>
                                                     <div className="col-md-6">
-                                                        {event._id === this.state.currentMap && (
-                                                            <div>{<Location />}</div>
-                                                        )}
+                                                        {event._id === this.state.currentMap && <div>{<Map />}</div>}
                                                     </div>
                                                 </div>
                                             </div>

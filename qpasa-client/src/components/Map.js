@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactMapGL, { Marker } from 'react-map-gl'
 
-class Location extends React.Component {
+class Map extends React.Component {
     state = {
         viewport: {
             width: 345,
@@ -28,4 +28,4 @@ class Location extends React.Component {
     }
 }
 
-export default Location
+export default Map
