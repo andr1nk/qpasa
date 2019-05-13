@@ -273,7 +273,7 @@ require('./passport')(app)
 
 app.use(
   cors({
-    origin: "https://qpasa.herokuapp.com/",
+    origin: "http://localhost:3000/",
     credentials: true
   })
 );
