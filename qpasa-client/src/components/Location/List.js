@@ -11,7 +11,7 @@ class LocationList extends React.Component {
 
   getData = () => {
     axios
-      .get("http://localhost:5000/api/locations", { withCredentials: true })
+      .get(`${process.env.REACT_APP_API_URL}/api/locations`, { withCredentials: true })
       .then(response => {
         this.setState({
           locations: response.data

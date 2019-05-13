@@ -18,7 +18,7 @@ class EditLocation extends React.Component {
 
     axios
       .put(
-        `http://localhost:5000/api/locations/${id}`,
+        `${process.env.REACT_APP_API_URL}/api/locations/${id}`,
         {
           city: this.state.location.city,
           name: this.state.location.name,
