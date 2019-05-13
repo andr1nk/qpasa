@@ -11,7 +11,7 @@ class Event extends React.Component {
     }
 
     fetchData = () => {
-        axios.get('https://qpasa-api.herokuapp.com/api/events').then(response => {
+        axios.get('https://qpasa.herokuapp.com/api/events').then(response => {
             this.setState({
                 events: response.data
             })
