@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 // Seeds file that remove all users and create 2 new users
 
 // To execute this seed, run from the root of the project
@@ -11,8 +13,9 @@ const Location = require("../models/Location")
 
 const bcryptSalt = 10;
 
-const mongoDBURL= process.env.NODE_ENV === "development" ?  process.env.MONGO_DEV_URL :  process.env.MONGO_PROD_URL
+const mongoDBURL = process.env.NODE_ENV === "development" ? process.env.MONGO_DEV_URL : process.env.MONGO_PROD_URL
 
+console.log(mongoDBURL)
 
 mongoose
   .connect(mongoDBURL, { useNewUrlParser: true })
@@ -236,3 +239,4 @@ Location.deleteMany()
     mongoose.disconnect()
     throw err
   })
+

@@ -21,6 +21,7 @@ const scrapeResidentAdvisorBerlin = async (day_residentAdvisorFormat, day_qpasaF
 
     await browser.close();
     scrapedData.map( el => el.date = day_qpasaFormat)
+    console.log("Scraper executed")
     return scrapedData;
 };
 

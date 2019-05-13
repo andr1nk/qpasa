@@ -11,7 +11,8 @@ class Event extends React.Component {
     }
 
     fetchData = () => {
-        axios.get(`${process.env.REACT_APP_API_URL}/api/events`).then(response => {
+        axios.get(`${process.env.REACT_APP_SERVER_URL}/api/events`).then(response => {
+            console.log(response.data)
             this.setState({
                 events: response.data
             })

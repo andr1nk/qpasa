@@ -69,7 +69,7 @@ new CronJob(
     // Delete events of yesterday from the database
     Event.deleteMany({ date: day0 })
       .then(() => {
-        //console.log("deleted events from yesterday")
+        console.log("deleted events from yesterday")
       })
       .catch(err => {
         console.error(err)
@@ -89,7 +89,7 @@ new CronJob(
             eventsOfDayArray.forEach(event => {
 
               const { city, eventName, locationName, description, date, url } = event
-              // console.log(event)
+              console.log("events scrape", event.eventName )
               //check if event is in database
               Event.find({ $and: [{ name: eventName }, { date: date }] })
                 .then(duplicateEvent => {
@@ -273,7 +273,7 @@ require('./passport')(app)
 
 app.use(
   cors({
-    origin: "http://localhost:3000/",
+    origin: "http://localhost:3000",
     credentials: true
   })
 );

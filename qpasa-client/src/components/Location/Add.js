@@ -33,7 +33,7 @@ class AddLocation extends React.Component {
 
     axios
       .post(
-        `${process.env.REACT_APP_API_URL}/api/locations`,
+        `${process.env.REACT_APP_SERVER_URL}/api/locations`,
         {
           city: this.state.city,
           name: this.state.name,

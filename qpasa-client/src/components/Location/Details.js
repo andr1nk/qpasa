@@ -12,7 +12,7 @@ class LocationDetails extends React.Component {
     const id = this.props.match.params.id;
 
     axios
-      .get(`${process.env.REACT_APP_API_URL}/api/locations/${id}`, {
+      .get(`${process.env.REACT_APP_SERVER_URL}/api/locations/${id}`, {
         withCredentials: true
       })
       .then(response => {
@@ -26,7 +26,7 @@ class LocationDetails extends React.Component {
     console.log('delete method called')
     const id = this.props.match.params.id;
 
-    axios.delete(`${process.env.REACT_APP_API_URL}/api/locations/${id}`).then(response => {
+    axios.delete(`${process.env.REACT_APP_SERVER_URL}/api/locations/${id}`).then(response => {
       // redirects to /projects
       this.props.history.push("/locations");
     });
