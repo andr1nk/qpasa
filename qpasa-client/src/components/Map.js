@@ -6,8 +6,8 @@ class Map extends React.Component {
         viewport: {
             width: 345,
             height: 300,
-            latitude: 47.3748365,
-            longitude: 8.5325012,
+            latitude: this.props.latitude,
+            longitude: this.props.longitude,
             zoom: 14
         }
     }
@@ -16,7 +16,7 @@ class Map extends React.Component {
         console.log(this.state)
         return (
             <ReactMapGL
-                mapboxApiAccessToken={process.env.MAPBOX_ACCESS_TOKEN}
+                mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
                 {...this.state.viewport}
                 onViewportChange={viewport => this.setState({ viewport })}
             >
