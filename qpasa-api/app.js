@@ -52,9 +52,9 @@ new CronJob(
   // Every Day at 6 p.m.
   //'18 * * *',
   // Dayly at 12am and 11PM
-  // '12,23 * * *',
+  '12,23 * * *',
   // Every 5min (00:05, 00:10, ...)
-  '*/10 * * * *',
+  '*/5 * * * *',
   function () {
 
     console.log(`CronJob executed`)
