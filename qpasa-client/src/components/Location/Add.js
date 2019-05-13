@@ -47,6 +47,15 @@ class AddLocation extends React.Component {
       )
       .then(() => {
         this.props.getData();
+        this.setState({
+            name: "",
+            city: "",
+            GPS: {
+              lat: "",
+              long: ""
+            },
+            address: ""
+        })
       });
   };
 

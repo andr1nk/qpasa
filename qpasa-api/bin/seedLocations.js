@@ -219,6 +219,42 @@ let locations = [
     },
     address: "Gessnerallee 8, 8001 Zürich, Schweiz",
   },
+  {
+    city: "Berlin",
+    name: "Watergate",
+    GPS: {
+      lat: "",
+      long: ""
+    },
+    address: "",
+  },
+  {
+    city: "Berlin",
+    name: "Wilde Renate",
+    GPS: {
+      lat: "",
+      long: ""
+    },
+    address: """,
+  },
+  {
+    city: "Berlin",
+    name: "S",
+    GPS: {
+      lat: "",
+      long: ""
+    },
+    address: """,
+  },
+  {
+    city: "Berlin",
+    name: "Wilde Renate",
+    GPS: {
+      lat: "",
+      long: ""
+    },
+    address: "",
+  },
 ]
 
 

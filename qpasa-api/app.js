@@ -49,12 +49,12 @@ const day7 = moment(new Date()).add(6, 'day').format('DD.MM.YYYY')      // ...
 new CronJob(
   // Every 10 seconds: 
   // '*/30 * * * * *',
-  // Every Day at 6 p.m.
+  // Daily at 6 p.m.
   //'18 * * *',
-  // Dayly at 12am, 5pm and 11PM
-  // '12,23 * * *',
+  // Daily at 12am, 5pm and 11PM
+  '12,23 * * *',
   // Every 5min (00:05, 00:10, ...)
-  '*/30 * * * *',
+  // '*/5 * * * *',
   function () {
 
     console.log(`CronJob executed`)
@@ -69,7 +69,7 @@ new CronJob(
     // Delete events of yesterday from the database
     Event.deleteMany({ date: day0 })
       .then(() => {
-        console.log("deleted events from yesterday")
+        // console.log("deleted events from yesterday")
       })
       .catch(err => {
         console.error(err)
@@ -81,7 +81,7 @@ new CronJob(
     createEventsScraperBerlin = (scrapeBerlinDay, day) => {
       scrapeBerlinDay
         .then(events => {
-            console.log(`Berlin events creation for ${day}`)
+            // console.log(`Berlin events creation for ${day}`)
             const eventsOfDayArray = events.filter(el => {
               if (el.date === day) return el
             })
@@ -89,25 +89,25 @@ new CronJob(
             eventsOfDayArray.forEach(event => {
 
               const { city, eventName, locationName, description, date, url } = event
-              console.log("events scrape", event.eventName )
+              // console.log("event scrape", event.eventName )
               //check if event is in database
               Event.find({ $and: [{ name: eventName }, { date: date }] })
                 .then(duplicateEvent => {
                   if (duplicateEvent.length > 0) {
-                    console.log(`Event ${eventName} for date ${date} already in database`)
+                    // console.log(`${city} | ${eventName} | ${date} already in database`)
                   } else {
                     // Upon event creation, find the location of event in our Location databse
                     Location.find({ name: locationName })
                       .then(oneLocation => {
-                        console.log(oneLocation)
+                        // console.log(oneLocation)
                         if (oneLocation.length !== 1) {
-                          console.log(`Event not created, location probably unknown: ${locationName}`)
+                          // console.log(`Berlin | Event not created, location probably unknown: ${locationName}`)
                         } else {
                           // create event            
                           let locationId = oneLocation[0]._id
                           Event.create({ date, url, name: eventName, description, location: locationId })
                             .then(() => {
-                              console.log('Event created for today: ', event)
+                              // console.log(`Berlin Event created for ${day}: `, event)
                             })
                             .catch(err => {
                               console.error(err)
@@ -154,7 +154,7 @@ new CronJob(
 
         // Function to create events in our database
         createEvents = (day) => {
-          console.log(`Züri events creation for ${day}`)
+          // console.log(`Züri events creation for ${day}`)
           const eventsOfDayArray = data.allFutureEvents.filter(el => {
             if (el.date === day) return el
           })
@@ -168,19 +168,19 @@ new CronJob(
             Event.find({ $and: [{ name: title }, { date: date }] })
               .then(duplicateEvent => {
                 if (duplicateEvent.length > 0) {
-                  console.log(`Event ${title} for date ${date} already in database`)
+                  // console.log(`Zürich | ${title} | ${date} already in database`)
                 } else {
                   // Upon event creation, find the location of event in our Location databse
                   Location.find({ name: locationName })
                     .then(oneLocation => {
                       if (oneLocation.length !== 1) {
-                        // console.log("Event not created, probably unknown location")
+                        // console.log("Züri | Event not created, probably unknown location", oneLocation)
                       } else {
                         // create event            
                         let locationId = oneLocation[0]._id
                         Event.create({ date, url, name: title, description, location: locationId })
                           .then(() => {
-                            // console.log('Event created for today: ', event)
+                            console.log('Event created for today: ', event)
                           })
                           .catch(err => {
                             console.error(err)
