@@ -23,7 +23,9 @@ class Home extends React.Component {
                         <Link to="/events-zurich">
                             <button className="btn btn-lg btn-outline-dark button">Zürich</button>
                         </Link>
-                        <button className="btn btn-lg btn-outline-dark button">Berlin</button>
+                        <Link to="/week-events">
+                            <button className="btn btn-lg btn-outline-dark button">Berlin</button>
+                        </Link>
                     </div>
                 </div>
             </div>

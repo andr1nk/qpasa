@@ -13,7 +13,7 @@ class Map extends React.Component {
     }
 
     render() {
-        console.log(this.state)
+        console.log('bifuwqe')
         return (
             <ReactMapGL
                 mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}

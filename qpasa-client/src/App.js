@@ -10,32 +10,32 @@ import AddLocation from './components/Location/Add'
 import Signup from './components/Auth/Signup'
 import Login from './components/Auth/Login'
 import { loggedin } from './services/auth'
-import ProtectedRoute from "./components/ProtectedRoute";
+import ProtectedRoute from './components/ProtectedRoute'
 
 import { Switch, Route } from 'react-router-dom'
+import WeekEvents from './components/WeekEvents'
 
 class App extends React.Component {
-
     state = {
         loggedIn: null
-    };
+    }
 
     setUser = user => {
         this.setState({
             loggedIn: user
-        });
-    };
+        })
+    }
 
     getUser = () => {
         loggedin().then(user => {
             this.setState({
                 loggedIn: user
-            });
-        });
-    };
+            })
+        })
+    }
 
     componentDidMount() {
-        this.getUser();
+        this.getUser()
     }
 
     render() {
@@ -45,26 +45,25 @@ class App extends React.Component {
                 <Switch>
                     <Route exact path="/" component={Home} />
                     <Route exact path="/events-zurich" component={Event} />
+                    <Route exact path="/week-events" component={WeekEvents} /> //should be removed ones that is working
                     <Route
                         exact
                         path="/signup"
                         //  component={Signup}
                         //  render allows us to pass props to our component inside Routes
-                        render={(props) => <Signup {...props} setUser={this.setUser} />}
+                        render={props => <Signup {...props} setUser={this.setUser} />}
                     />
                     <Route
                         exact
                         path="/login"
                         //  component={login}
                         //  render allows us to pass props to our component inside Routes
-                        render={(props) => <Login {...props} setUser={this.setUser} />}
+                        render={props => <Login {...props} setUser={this.setUser} />}
                     />
                     <Route
                         exact
                         path="/locations/:id"
-                        render={props => (
-                            <LocationDetails {...props} user={this.state.loggedIn} />
-                        )}
+                        render={props => <LocationDetails {...props} user={this.state.loggedIn} />}
                     />
                     <ProtectedRoute
                         user={this.state.loggedIn}
