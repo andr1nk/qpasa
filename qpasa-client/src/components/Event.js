@@ -17,6 +17,7 @@ class Event extends React.Component {
             })
         })
     }
+    //nada
 
     componentDidMount() {
         this.fetchData()
