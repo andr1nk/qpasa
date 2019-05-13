@@ -3,8 +3,8 @@ import axios from "axios";
 
 class AddLocation extends React.Component {
   state = {
-    city: "",
     name: "",
+    city: "",
     GPS: {
       lat: "",
       long: ""
@@ -16,9 +16,16 @@ class AddLocation extends React.Component {
     const name = event.target.name;
     const value = event.target.value;
 
-    this.setState({
-      [name]: value
-    });
+    if (name === "lat" || name === "long") {
+      this.setState({
+        GPS: {
+          [name]:value
+        }});
+    } else {
+      this.setState({
+        [name]: value
+      });
+    }
   };
 
   handleSubmit = event => {
@@ -40,7 +47,6 @@ class AddLocation extends React.Component {
       )
       .then(() => {
         this.props.getData();
-        this.setState({ title: "", description: "" });
       });
   };
 
@@ -49,29 +55,59 @@ class AddLocation extends React.Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
-            <label>title:</label>
+            <label>name</label>
             <input
               className="form-control"
-              value={this.state.title}
+              value={this.state.name}
               onChange={this.handleChange}
-              name="title"
+              name="name"
               type="text"
             />
           </div>
           <div className="form-group">
-            <label>description:</label>
+            <label>city</label>
             <input
               className="form-control"
-              value={this.state.description}
+              value={this.state.city}
               onChange={this.handleChange}
               type="text"
-              name="description"
+              name="city"
+            />
+          </div>
+          <div className="form-group">
+            <label>GPS lat</label>
+            <input
+              className="form-control"
+              value={this.state.GPS.lat}
+              onChange={this.handleChange}
+              type="text"
+              name="lat"
+            />
+          </div>
+          <div className="form-group">
+            <label>GPS long</label>
+            <input
+              className="form-control"
+              value={this.state.GPS.long}
+              onChange={this.handleChange}
+              type="text"
+              name="long"
+            />
+          </div>
+          <div className="form-group">
+            <label>address</label>
+            <input
+              className="form-control"
+              value={this.state.address}
+              onChange={this.handleChange}
+              type="text"
+              name="address"
             />
           </div>
           <input
             className="btn btn-primary"
             type="submit"
-            value="Create Project"
+            value="Add Location"
           />
         </form>
       </div>

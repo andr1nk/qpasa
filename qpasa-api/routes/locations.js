@@ -4,7 +4,6 @@ const Location = require('../models/Location')
 
 
 router.get('/locations', (req, res, next) => {
-
   Location.find({})
     .then(location => {
       res.json(location)
@@ -26,6 +25,38 @@ router.post('/locations', (req, res) => {
   })
     .then(response => {
       res.json(response);
+    })
+    .catch(error => {
+      res.json(error);
+    });
+});
+
+router.get("/locations/:id", (req, res) => {
+  Location.findById(req.params.id)
+    .then(location => {
+      res.json(location);
+    })
+    .catch(error => {
+      res.json(error);
+    });
+});
+
+router.put("/locations/:id", (req, res) => {
+  Location.findByIdAndUpdate(req.params.id, req.body)
+    .then(() => {
+      // .status() optional
+      res.status(200).json({ message: "ok" });
+    })
+    .catch(error => {
+      res.json(error);
+    });
+});
+
+router.delete("/locations/:id", (req, res) => {
+  Location.findByIdAndDelete(req.params.id)
+    .then(() => {
+      // .status() optional
+      res.status(200).json({ message: "ok" });
     })
     .catch(error => {
       res.json(error);
