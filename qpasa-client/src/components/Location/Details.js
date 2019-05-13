@@ -38,11 +38,12 @@ class LocationDetails extends React.Component {
 
   render() {
     const { location } = this.state;
+    console.log('render called: ', location)
     let editBlock = <></>;
 
       editBlock = (
         <div>
-          <EditLocation location={location} getDetails={this.getLocation} />
+          <EditLocation location={location} getLocation={this.getLocation} />
           <button
             style={{ marginTop: "10px" }}
             className="btn btn-danger"
@@ -55,21 +56,12 @@ class LocationDetails extends React.Component {
 
     return (
       <div style={{ margin: '70px' }}>
-        <h1>{location.city}</h1>
-        <p>{location.name}</p>
+        <h2>{location.name}</h2>
+        <p>{location.city}</p>
 
-        {location.tasks && location.tasks.length > 0 && <h3>Tasks</h3>}
-        {location.tasks &&
-          location.tasks.map(task => {
-            return (
-              <div key={task._id}>
-                <Link to={`/tasks/${task._id}`}>{task.title}</Link>
-              </div>
-            );
-          })}
         {editBlock}
         <br />
-        <Link to="/projects">Back</Link>
+        <Link to="/locations">Back</Link>
       </div>
     );
   }

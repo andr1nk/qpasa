@@ -99,15 +99,15 @@ new CronJob(
                     // Upon event creation, find the location of event in our Location databse
                     Location.find({ name: locationName })
                       .then(oneLocation => {
-                        // console.log(oneLocation)
+                        console.log(oneLocation)
                         if (oneLocation.length !== 1) {
-                          // console.log("Event not created, probably unknown location")
+                          console.log(`Event not created, location probably unknown: ${locationName}`)
                         } else {
                           // create event            
                           let locationId = oneLocation[0]._id
                           Event.create({ date, url, name: eventName, description, location: locationId })
                             .then(() => {
-                              // console.log('Event created for today: ', event)
+                              console.log('Event created for today: ', event)
                             })
                             .catch(err => {
                               console.error(err)

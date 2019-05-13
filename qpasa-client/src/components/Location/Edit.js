@@ -2,65 +2,125 @@ import React from "react";
 import axios from "axios";
 
 class EditLocation extends React.Component {
-  // state = {
-  //   title: "",
-  //   description: ""
-  // };
+  state = {
+    location: {}
+  };
 
-  // handleSubmit = event => {
-  //   event.preventDefault();
+  componentDidUpdate (prevProps, prevState){
+    const location = this.props.location
+    if (prevProps.location !== location) this.setState({location})
+  }
 
-  //   const id = this.props.project._id;
+  handleSubmit = event => {
+    event.preventDefault();
 
-  //   axios
-  //     .put(
-  //       `http://localhost:5000/api/projects/${id}`,
-  //       {
-  //         title: this.state.title,
-  //         description: this.state.description
-  //       },
-  //       { withCredentials: true }
-  //     )
-  //     .then(() => {
-  //       this.props.getDetails();
-  //       this.setState({
-  //         title: "",
-  //         description: ""
-  //       });
-  //     });
-  // };
+    const id = this.props.location._id;
 
-  // handleChange = event => {
-  //   const name = event.target.name;
-  //   const value = event.target.value;
+    axios
+      .put(
+        `http://localhost:5000/api/locations/${id}`,
+        {
+          city: this.state.location.city,
+          name: this.state.location.name,
+          GPS: {
+            lat: this.state.location.GPS.lat,  
+            long: this.state.location.GPS.long
+          },
+          address: this.state.location.address
+        },
+        { withCredentials: true }
+      )
+      .then(() => {
+        this.props.getLocation();
+        this.setState({
+          location: {}
+        });
+      });
+  };
 
-  //   this.setState({ [name]: value });
-  // };
+  handleChange = event => {
+    
+    const name = event.target.name;
+    const value = event.target.value;
+
+
+    if (name === "lat" || name === "long") {
+      this.setState({
+        location: {
+          ...this.state.location,
+          GPS: {
+            ...this.state.location.GPS,
+            [name]: value
+          }
+        }
+      })}
+     else{   this.setState({
+        location: {
+        ...this.state.location,
+        [name]: value
+         }
+      });
+    }
+    console.log(this.state)
+};
+
+
 
   render() {
+    
     return (
       <div>
-        {/* <hr />
+        <hr />
         <h3>Edit form</h3>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
-            <label>title:</label>
+            <label>name:</label>
             <input
               className="form-control"
-              value={this.state.title}
+              value={this.state.location.name}
               onChange={this.handleChange}
-              name="title"
+              name="name"
               type="text"
             />
           </div>
           <div className="form-group">
-            <label>description:</label>
+            <label>city:</label>
             <input
               className="form-control"
-              value={this.state.description}
+              value={this.state.location.city}
               onChange={this.handleChange}
               type="text"
-              name="description"
+              name="city"
+            />
+          </div>
+          <div className="form-group">
+            <label>GPS lat:</label>
+            <input
+              className="form-control"
+              value={this.state.location.GPS && this.state.location.GPS.lat}
+              onChange={this.handleChange}
+              type="text"
+              name="lat"
+            />
+          </div>
+          <div className="form-group">
+            <label>GPS long:</label>
+            <input
+              className="form-control"
+              value={this.state.location.GPS && this.state.location.GPS.long}
+              onChange={this.handleChange}
+              type="text"
+              name="long"
+            />
+          </div>
+          <div className="form-group">
+            <label>address:</label>
+            <input
+              className="form-control"
+              value={this.state.location.address}
+              onChange={this.handleChange}
+              type="text"
+              name="address"
             />
           </div>
           <input
@@ -68,7 +128,7 @@ class EditLocation extends React.Component {
             type="submit"
             value="Update Project"
           />
-        </form> */}
+        </form>
       </div>
     );
   }

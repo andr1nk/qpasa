@@ -3,8 +3,8 @@ import axios from "axios";
 
 class AddLocation extends React.Component {
   state = {
-    city: "",
     name: "",
+    city: "",
     GPS: {
       lat: "",
       long: ""
@@ -55,23 +55,23 @@ class AddLocation extends React.Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
-            <label>city</label>
-            <input
-              className="form-control"
-              value={this.state.city}
-              onChange={this.handleChange}
-              name="city"
-              type="text"
-            />
-          </div>
-          <div className="form-group">
             <label>name</label>
             <input
               className="form-control"
               value={this.state.name}
               onChange={this.handleChange}
-              type="text"
               name="name"
+              type="text"
+            />
+          </div>
+          <div className="form-group">
+            <label>city</label>
+            <input
+              className="form-control"
+              value={this.state.city}
+              onChange={this.handleChange}
+              type="text"
+              name="city"
             />
           </div>
           <div className="form-group">
@@ -107,7 +107,7 @@ class AddLocation extends React.Component {
           <input
             className="btn btn-primary"
             type="submit"
-            value="Create Project"
+            value="Add Location"
           />
         </form>
       </div>

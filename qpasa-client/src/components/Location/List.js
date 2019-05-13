@@ -33,8 +33,8 @@ class LocationList extends React.Component {
             return (
               <div key={location._id}>
                 <div>
-                  <h1>city: {location.city}</h1>
-                  <p>name: {location.name}</p>
+                  <h2>{location.name}</h2>
+                  <p>city: {location.city}</p>
                   <p>GPS lat: {location.GPS.lat}</p>
                   <p>GPS long: {location.GPS.long}</p>
                   <p>address: {location.address}</p>
