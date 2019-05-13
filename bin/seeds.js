@@ -93,86 +93,128 @@ let locations = [
   {
     city: "Zürich",
     name: "Bogen F",
-    GPS: "129803120983",
-    address: "teststreet1234",
+    GPS: {
+      lat: "47.3847814",
+      long: "8.5206887"
+    },
+    address: "Viaduktstrasse 97, 8005 Zürich, Schweiz",
   },
   {
     city: "Zürich",
     name: "Dynamo",
-    GPS: "129803120983",
-    address: "teststreet1234",
+    GPS: {
+      lat: "47.3834046",
+      long: "8.5371934"
+    },
+    address: "Wasserwerkstrasse 21, 8006 Zürich, Schweiz",
   },
   {
     city: "Zürich",
     name: "El Lokal",
-    GPS: "129803120983",
-    address: "teststreet1234",
+    GPS: {
+      lat: "47.3834224",
+      long: "8.5306273"
+    },
+    address: "Gessnerallee 11, 8001 Zürich, Schweiz",
   },
   {
     city: "Zürich",
     name: "Exil",
-    GPS: "129803120983",
-    address: "teststreet1234",
+    GPS: {
+      lat: "47.3883073",
+      long: "8.517131"
+    },
+    address: "Hardstrasse 245, 8005 Zürich, Schweiz",
   },
   {
     city: "Zürich",
     name: "Hafenkneipe",
-    GPS: "129803120983",
-    address: "teststreet1234",
+    GPS: {
+      lat: "47.3763376",
+      long: "8.5310883"
+    },
+    address: "Militärstrasse 12, 8004 Zürich, Schweiz",
   },
   {
     city: "Zürich",
     name: "Helsinki",
-    GPS: "129803120983",
-    address: "teststreet1234",
+    GPS: {
+      lat: "47.3858815",
+      long: "8.5159686"
+    },
+    address: "Geroldstrasse 35, 8005 Zürich, Schweiz",
   },
   {
     city: "Zürich",
     name: "Kaufleuten",
-    GPS: "129803120983",
-    address: "teststreet1234",
+    GPS: {
+      lat: "47.3716427",
+      long: "8.5341738"
+    },
+    address: "Pelikanpl. 18, 8001 Zürich, Schweiz",
   },
   {
     city: "Zürich",
     name: "Mascotte",
-    GPS: "129803120983",
-    address: "teststreet1234",
+    GPS: {
+      lat: "47.3663792",
+      long: "8.5445846"
+    },
+    address: "Theaterstrasse 10, 8001 Zürich, Schweiz",
   },
   {
     city: "Zürich",
     name: "Mehrspur",
-    GPS: "129803120983",
-    address: "teststreet1234",
+    GPS: {
+      lat: "47.3915258",
+      long: "8.5097185"
+    },
+    address: "Toni-Areal, Förrlibuckstrasse 109, 8005 Zürich, Schweiz",
   },
   {
     city: "Zürich",
     name: "Moods",
-    GPS: "129803120983",
-    address: "teststreet1234",
+    GPS: {
+      lat: "47.3886794",
+      long: "8.5173859"
+    },
+    address: "Schiffbauplatz, 8005 Zürich, Schweiz",
   },
   {
     city: "Zürich",
     name: "Papiersaal",
-    GPS: "129803120983",
-    address: "teststreet1234",
+    GPS: {
+      lat: "47.3581993",
+      long: "8.5204826"
+    },
+    address: "Kalanderpl. 6, 8045 Zürich, Schweiz",
   },
   {
     city: "Zürich",
     name: "Rote Fabrik",
-    GPS: "129803120983",
-    address: "teststreet1234",
+    GPS: {
+      lat: "47.3435616",
+      long: "8.5336404"
+    },
+    address: "Seestrasse 395, 8038 Zürich, Schweiz",
   },
   {
     city: "Zürich",
     name: "Sender",
-    GPS: "129803120983",
-    address: "teststreet1234",
+    GPS: {
+      lat: "47.3772136",
+      long: "8.5254738"
+    },
+    address: "Kurzgasse 4, 8004 Zürich, Schweiz",
   },
   {
     city: "Zürich",
     name: "Stall 6",
-    GPS: "129803120983",
-    address: "teststreet1234",
+    GPS: {
+      lat: "47.3748365",
+      long: "8.5325065"
+    },
+    address: "Gessnerallee 8, 8001 Zürich, Schweiz",
   },
 ]
 

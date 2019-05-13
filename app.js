@@ -52,9 +52,9 @@ new CronJob(
   // Every Day at 6 p.m.
   //'18 * * *',
   // Dayly at 12am and 11PM
-  '12,23 * * *',
+  // '12,23 * * *',
   // Every 5min (00:05, 00:10, ...)
-  // '*/5 * * * *',
+  '*/10 * * * *',
   function () {
 
     console.log(`CronJob executed`)
@@ -99,15 +99,15 @@ new CronJob(
                     // Upon event creation, find the location of event in our Location databse
                     Location.find({ name: locationName })
                       .then(oneLocation => {
-                        // console.log(oneLocation)
+                        console.log(oneLocation)
                         if (oneLocation.length !== 1) {
-                          // console.log("Event not created, probably unknown location")
+                          console.log(`Event not created, location probably unknown: ${locationName}`)
                         } else {
                           // create event            
                           let locationId = oneLocation[0]._id
                           Event.create({ date, url, name: eventName, description, location: locationId })
                             .then(() => {
-                              // console.log('Event created for today: ', event)
+                              console.log('Event created for today: ', event)
                             })
                             .catch(err => {
                               console.error(err)
@@ -273,7 +273,8 @@ require('./passport')(app)
 
 app.use(
   cors({
-    origin: "http://localhost:3000"
+    origin: "http://localhost:3000",
+    credentials: true
   })
 );
 
@@ -284,6 +285,9 @@ app.use("/", index);
 
 const events = require("./routes/events");
 app.use("/api", events);
+
+const locations = require("./routes/locations");
+app.use("/api", locations);
 
 const auth = require('./routes/auth')
 app.use('/api', auth)

@@ -5,7 +5,10 @@ const locationSchema = new Schema(
   {
     city: String,
     name: String,
-    GPS: String,
+    GPS: {
+      lat: String,
+      long: String
+    },
     address: String
   }
 )
