@@ -11,7 +11,7 @@ const Location = require("../models/Location")
 
 const bcryptSalt = 10;
 
-const mongoDBURL= process.env.NODE_ENV === "development" ?  process.env.MONGO_DEV_URL :  process.env.MONGODB_URI
+const mongoDBURL= process.env.NODE_ENV === "development" ?  process.env.MONGO_DEV_URL :  process.env.MONGO_PROD_URL
 
 
 mongoose

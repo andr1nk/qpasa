@@ -21,7 +21,7 @@ const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
 const flash = require('connect-flash')
 
-const mongoDBURL = process.env.NODE_ENV === "development" ? process.env.MONGO_DEV_URL : process.env.MONGODB_URI
+const mongoDBURL = process.env.NODE_ENV === "development" ? process.env.MONGO_DEV_URL : process.env.MONGO_PROD_URL
 
 mongoose
   .connect(mongoDBURL, { useNewUrlParser: true })
@@ -273,7 +273,7 @@ require('./passport')(app)
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://qpasa.herokuapp.com/",
     credentials: true
   })
 );
@@ -295,5 +295,9 @@ app.use('/api', auth)
 const whoisgoingRoutes = require('./routes/whoisgoing')
 
 app.use('/api', whoisgoingRoutes)
+
+app.use((req, res, next) => {
+  res.sendFile(__dirname+"/public/index.html")
+})
 
 module.exports = app
