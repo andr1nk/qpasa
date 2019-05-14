@@ -10,7 +10,7 @@ const scrapeResidentAdvisorBerlin = async (day_residentAdvisorFormat, day_qpasaF
 
     await page.goto(`https://www.residentadvisor.net/events/de/berlin/day/${day_residentAdvisorFormat}`,
         {
-            timeout: 0
+            timeout: 3000000
         });
     const scrapedData = await page.evaluate(() =>
         Array.from(document.querySelectorAll("div.bbox")).map( link =>  ({
