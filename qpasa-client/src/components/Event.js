@@ -1,7 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import Navbar from './Navbar'
-import Location from './Location'
+import Map from './Map'
 import './Event.css'
 
 class Event extends React.Component {
@@ -25,7 +24,6 @@ class Event extends React.Component {
     }
 
     showMapHandler = eventId => {
-        console.log('holandow')
         this.setState({
             currentMap: eventId
         })
@@ -74,9 +72,18 @@ class Event extends React.Component {
                                                         </a>
                                                     </div>
                                                     <div className="col-md-6">
-                                                        {event._id === this.state.currentMap && (
-                                                            <div>{<Location />}</div>
-                                                        )}
+                                                        {event._id === this.state.currentMap &&
+                                                            event.location.GPS.lat &&
+                                                            event.location.GPS.long && (
+                                                                <div>
+                                                                    {
+                                                                        <Map
+                                                                            latitude={event.location.GPS.lat}
+                                                                            longitude={event.location.GPS.long}
+                                                                        />
+                                                                    }
+                                                                </div>
+                                                            )}
                                                     </div>
                                                 </div>
                                             </div>
