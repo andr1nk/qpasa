@@ -22,7 +22,7 @@ const scrapeResidentAdvisorBerlin = async (day_residentAdvisorFormat, day_qpasaF
     await browser.close();
     const scrapedDataFiltered = scrapedData.filter( el => el.locationName)
     scrapedDataFiltered.map( el => el.date = day_qpasaFormat)
-    scrapedDataFiltered.map( el => console.log(`${day_qpasaFormat}: ${el.eventName} ¦ ${el.locationName} | ${el.url}` ))
+    // scrapedDataFiltered.map( el => console.log(`${day_qpasaFormat}: ${el.eventName} ¦ ${el.locationName} | ${el.url}` ))
     return scrapedDataFiltered;
 };
 

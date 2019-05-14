@@ -81,7 +81,7 @@ new CronJob(
     createEventsScraperBerlin = (scrapeBerlinDay, day) => {
       scrapeBerlinDay
         .then(events => {
-            // console.log(`Berlin events creation for ${day}`)
+            console.log(`Berlin events creation for ${day}`)
             const eventsOfDayArray = events.filter(el => {
               if (el.date === day) return el
             })
@@ -154,7 +154,7 @@ new CronJob(
 
         // Function to create events in our database
         createEvents = (day) => {
-          // console.log(`Züri events creation for ${day}`)
+          console.log(`Züri events creation for ${day}`)
           const eventsOfDayArray = data.allFutureEvents.filter(el => {
             if (el.date === day) return el
           })
@@ -180,7 +180,7 @@ new CronJob(
                         let locationId = oneLocation[0]._id
                         Event.create({ date, url, name: title, description, location: locationId })
                           .then(() => {
-                            console.log('Event created for today: ', event)
+                            // console.log('Event created for today: ', event)
                           })
                           .catch(err => {
                             console.error(err)

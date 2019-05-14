@@ -235,7 +235,7 @@ let locations = [
       lat: "",
       long: ""
     },
-    address: """,
+    address: "",
   },
   {
     city: "Berlin",
@@ -244,7 +244,7 @@ let locations = [
       lat: "",
       long: ""
     },
-    address: """,
+    address: "",
   },
   {
     city: "Berlin",
