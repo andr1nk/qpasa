@@ -44,7 +44,8 @@ class App extends React.Component {
                 <Navbar setUser={this.setUser} loggedIn={this.state.loggedIn} />
                 <Switch>
                     <Route exact path="/" component={Home} />
-                    <Route exact path="/events-zurich" component={EventList} />
+                    <Route exact path="/events-zurich" render={props => <EventList {...props} />} />
+                    <Route exact path="/events-berlin" render={props => <EventList {...props} />} />
                     <Route
                         exact
                         path="/signup"
