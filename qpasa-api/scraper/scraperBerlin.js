@@ -8,7 +8,10 @@ const scrapeResidentAdvisorBerlin = async (day_residentAdvisorFormat, day_qpasaF
     });
     const page = await browser.newPage();
 
-    await page.goto(`https://www.residentadvisor.net/events/de/berlin/day/${day_residentAdvisorFormat}`);
+    await page.goto(`https://www.residentadvisor.net/events/de/berlin/day/${day_residentAdvisorFormat}`,
+        {
+            timeout: 30000
+        });
     const scrapedData = await page.evaluate(() =>
         Array.from(document.querySelectorAll("div.bbox")).map( link =>  ({
             city: "Berlin",
@@ -22,7 +25,7 @@ const scrapeResidentAdvisorBerlin = async (day_residentAdvisorFormat, day_qpasaF
     await browser.close();
     const scrapedDataFiltered = scrapedData.filter( el => el.locationName)
     scrapedDataFiltered.map( el => el.date = day_qpasaFormat)
-    // scrapedDataFiltered.map( el => console.log(`${day_qpasaFormat}: ${el.eventName} ¦ ${el.locationName} | ${el.url}` ))
+    scrapedDataFiltered.map( el => console.log(`${day_qpasaFormat}: ${el.eventName} ¦ ${el.locationName} | ${el.url}` ))
     return scrapedDataFiltered;
 };
 
