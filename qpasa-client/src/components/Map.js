@@ -20,12 +20,8 @@ class Location extends React.Component {
                 {...this.state.viewport}
                 onViewportChange={viewport => this.setState({ viewport })}
             >
-                <Marker
-                    latitude={parseFloat(this.props.latitude)}
-                    longitude={parseFloat(this.props.longitude)}
-                    draggable
-                >
-                    <i className="fas fa-map-marker-alt" />
+                <Marker latitude={parseFloat(this.props.latitude)} longitude={parseFloat(this.props.longitude)}>
+                    <i className="fas fa-map-marker-alt" style={{ fontSize: '27px', color: '#cc1414' }} />
                 </Marker>
             </ReactMapGL>
         )
