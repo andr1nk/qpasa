@@ -4,7 +4,7 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Home from './components/Home'
-import Event from './components/Event'
+import EventList from './components/Events/EventList'
 import LocationList from './components/Location/List'
 import LocationDetails from './components/Location/Details'
 import AddLocation from './components/Location/Add'
@@ -44,7 +44,8 @@ class App extends React.Component {
                 <Navbar setUser={this.setUser} loggedIn={this.state.loggedIn} />
                 <Switch>
                     <Route exact path="/" component={Home} />
-                    <Route exact path="/events-zurich" component={Event} />
+                    <Route exact path="/events-zurich" render={props => <EventList {...props} />} />
+                    <Route exact path="/events-berlin" render={props => <EventList {...props} />} />
                     <Route
                         exact
                         path="/signup"
