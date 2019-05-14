@@ -12,6 +12,7 @@ import Signup from './components/Auth/Signup'
 import Login from './components/Auth/Login'
 import { loggedin } from './services/auth'
 import ProtectedRoute from './components/ProtectedRoute'
+import Days from './components/Days'
 
 import { Switch, Route } from 'react-router-dom'
 
@@ -44,8 +45,8 @@ class App extends React.Component {
                 <Navbar setUser={this.setUser} loggedIn={this.state.loggedIn} />
                 <Switch>
                     <Route exact path="/" component={Home} />
-                    <Route exact path="/events-zurich" render={props => <EventList {...props} />} />
-                    <Route exact path="/events-berlin" render={props => <EventList {...props} />} />
+                    <Route exact path="/events-zurich" render={props => <Days {...props} />} />
+                    <Route exact path="/events-berlin" render={props => <Days {...props} />} />
                     <Route
                         exact
                         path="/signup"

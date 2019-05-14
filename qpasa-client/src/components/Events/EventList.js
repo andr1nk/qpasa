@@ -25,7 +25,7 @@ class EventList extends React.Component {
         return (
             <div>
                 <div className="container event-container">
-                    {this.props.location.pathname === '/events-zurich'
+                    {this.props.pathname === '/events-zurich'
                         ? this.state.events
                               .filter(event => {
                                   return event.location.city === 'Zürich'
