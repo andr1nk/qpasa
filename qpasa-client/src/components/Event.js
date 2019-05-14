@@ -1,6 +1,5 @@
 import React from 'react'
 import axios from 'axios'
-import Navbar from './Navbar'
 import Map from './Map'
 import './Event.css'
 
@@ -25,7 +24,6 @@ class Event extends React.Component {
     }
 
     showMapHandler = eventId => {
-        console.log('holandow')
         this.setState({
             currentMap: eventId
         })
