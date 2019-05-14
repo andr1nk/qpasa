@@ -74,7 +74,18 @@ class Event extends React.Component {
                                                         </a>
                                                     </div>
                                                     <div className="col-md-6">
-                                                        {event._id === this.state.currentMap && <div>{<Map />}</div>}
+                                                        {event._id === this.state.currentMap &&
+                                                            event.location.GPS.lat &&
+                                                            event.location.GPS.long && (
+                                                                <div>
+                                                                    {
+                                                                        <Map
+                                                                            latitude={event.location.GPS.lat}
+                                                                            longitude={event.location.GPS.long}
+                                                                        />
+                                                                    }
+                                                                </div>
+                                                            )}
                                                     </div>
                                                 </div>
                                             </div>

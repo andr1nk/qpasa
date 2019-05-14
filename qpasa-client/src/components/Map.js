@@ -6,14 +6,13 @@ class Location extends React.Component {
         viewport: {
             width: 345,
             height: 300,
-            latitude: 47.3748365,
-            longitude: 8.5325012,
+            latitude: parseFloat(this.props.latitude),
+            longitude: parseFloat(this.props.longitude),
             zoom: 14
         }
     }
 
     render() {
-        console.log(this.state)
         return (
             <ReactMapGL
                 mapboxApiAccessToken={process.env.MAPBOX_ACCESS_TOKE}
