@@ -16,7 +16,7 @@ class Location extends React.Component {
         return (
             <ReactMapGL
                 mapStyle="mapbox://styles/mapbox/bright-v8"
-                mapboxApiAccessToken={process.env.MAPBOX_ACCESS_TOKEN}
+                mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
                 {...this.state.viewport}
                 onViewportChange={viewport => this.setState({ viewport })}
             >
