@@ -1,6 +1,9 @@
 import React from 'react'
 import './Home.css'
 import { Link } from 'react-router-dom'
+import moment from "moment";
+
+const day1 = moment(new Date()).format('DD.MM.YYYY')                    // Today
 
 class Home extends React.Component {
     render() {
@@ -20,10 +23,12 @@ class Home extends React.Component {
                         ipsum dolor sit amet.
                     </p>
                     <div className="buttons">
-                        <Link to="/events-zurich">
+                        <Link to={`/events-zurich/${day1}`} className="nav-link">
                             <button className="btn btn-lg btn-outline-dark button">Zürich</button>
                         </Link>
-                        <button className="btn btn-lg btn-outline-dark button">Berlin</button>
+                        <Link to={`/events-berlin/${day1}`} className="nav-link">
+                            <button className="btn btn-lg btn-outline-dark button">Berlin</button>
+                        </Link>
                     </div>
                 </div>
             </div>

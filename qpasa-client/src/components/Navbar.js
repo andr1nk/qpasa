@@ -1,6 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { logout } from '../services/auth'
+import moment from "moment";
+
+const day1 = moment(new Date()).format('DD.MM.YYYY')                    // Today
+
 
 class Navbar extends React.Component {
 
@@ -46,12 +50,12 @@ class Navbar extends React.Component {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/events-zurich" className="nav-link">
+                            <Link to={`/events-zurich/${day1}`} className="nav-link">
                                 Zürich
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/events-berlin" className="nav-link">
+                            <Link to={`/events-berlin/${day1}`} className="nav-link">
                                 Berlin
                             </Link>
                         </li>

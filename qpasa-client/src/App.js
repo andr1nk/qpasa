@@ -14,6 +14,10 @@ import Days from './components/Days'
 
 import { Switch, Route } from 'react-router-dom'
 
+import moment from "moment";
+
+const day1 = moment(new Date()).format('DD.MM.YYYY')                    // Today
+
 class App extends React.Component {
     state = {
         loggedIn: null
