@@ -27,7 +27,7 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div className="container">
+            <div className="container auth-container">
                 <h1 className="text-center">Login</h1>
 
                 <form className="col-md-8 offset-md-2" onSubmit={this.handleSubmit}>
