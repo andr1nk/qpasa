@@ -14,7 +14,6 @@ class Event extends React.Component {
     }
 
     render() {
-        console.log(this.props.event)
         const { date, _id, description, url } = this.props.event
         const { city, address } = this.props.event.location
         const { lat, long } = this.props.event.location.GPS

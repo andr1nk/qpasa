@@ -1,60 +1,64 @@
-import React from "react";
+import React from 'react'
 import './Signup.css'
-import { signup } from "../../services/auth";
-
+import { signup } from '../../services/auth'
 
 class Signup extends React.Component {
-  state = {
-    username: "",
-    password: ""
-  };
+    state = {
+        username: '',
+        password: ''
+    }
 
-  handleChange = event => {
-    const { name, value } = event.target;
+    handleChange = event => {
+        const { name, value } = event.target
 
-    this.setState({
-      [name]: value
-    });
-  };
+        this.setState({
+            [name]: value
+        })
+    }
 
-  handleSubmit = event => {
-    event.preventDefault();
+    handleSubmit = event => {
+        event.preventDefault()
 
-    const { username, password } = this.state;
+        const { username, password } = this.state
 
-    signup(username, password).then(user => {
-      this.props.setUser(user);
-      this.props.history.push('/')
-    });
-  };
+        signup(username, password).then(user => {
+            this.props.setUser(user)
+            this.props.history.push('/')
+        })
+    }
 
-  render() {
-    return (
-      <div className='container'> 
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            <label>username: </label>
-            <input
-              value={this.state.username}
-              onChange={this.handleChange}
-              type="text"
-              name="username"
-            />
-          </div>
-          <div>
-            <label>password: </label>
-            <input
-              value={this.state.password}
-              onChange={this.handleChange}
-              type="password"
-              name="password"
-            />
-          </div>
-          <input type="submit" value="signup" />
-        </form>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div className="container">
+                <h1 className="text-center">Signup</h1>
+                <form className="col-md-8 offset-md-2" onSubmit={this.handleSubmit}>
+                    <div className="form-group">
+                        <label>username: </label>
+                        <input
+                            className="form-control"
+                            value={this.state.username}
+                            onChange={this.handleChange}
+                            type="text"
+                            name="username"
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>password: </label>
+                        <input
+                            className="form-control"
+                            value={this.state.password}
+                            onChange={this.handleChange}
+                            type="password"
+                            name="password"
+                        />
+                    </div>
+                    <button type="submit" className="btn btn-outline-dark" value="signup">
+                        Submit
+                    </button>
+                </form>
+            </div>
+        )
+    }
 }
 
-export default Signup;
+export default Signup
