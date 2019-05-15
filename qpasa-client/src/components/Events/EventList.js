@@ -3,7 +3,6 @@ import axios from 'axios'
 import './Event.css'
 import Event from './Event'
 
-
 class EventList extends React.Component {
     state = {
         events: []
@@ -14,8 +13,8 @@ class EventList extends React.Component {
             .then(response => {
                 this.setState({
                     events: response.data
+                })
             })
-        })
     }
 
     componentDidMount() {
@@ -23,18 +22,20 @@ class EventList extends React.Component {
     }
 
     render() {
+        console.log(this.props.match)
+        let day = this.props.location.pathname.replace(`${this.props.path}/`, "")
         return (
             <div>
                 <div className="container event-container">
                     {this.props.pathname === '/events-zurich'
                         ? this.state.events
                             .sort((a, b) => a.location.name.localeCompare(b.location.name))
-                            .filter(event => event.location.city === 'Zürich' && event.date === this.props.day)
-                            .map(event => <div> <Event event={event} key={event._id} /> </div>)
+                            .filter(event => event.location.city === 'Zürich' && event.date === day)
+                            .map((event, index) => <div key={index}><Event event={event} /> </div>)
                         : this.state.events
                             .sort((a, b) => a.location.name.localeCompare(b.location.name))
-                            .filter(event => event.location.city === 'Berlin' && event.date === this.props.day)
-                            .map(event => <div><Event event={event} key={event._id} /></div>)
+                            .filter(event => event.location.city === 'Berlin' && event.date === day)
+                            .map((event, index) => <div key={index}><Event event={event} /></div>)
                     }
                 </div>
             </div>

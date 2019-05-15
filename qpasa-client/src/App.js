@@ -43,8 +43,8 @@ class App extends React.Component {
                 <Navbar setUser={this.setUser} loggedIn={this.state.loggedIn} />
                 <Switch>
                     <Route exact path="/" component={Home} />
-                    <Route exact path="/events-zurich" render={props => <Days {...props} />} />
-                    <Route exact path="/events-berlin" render={props => <Days {...props} />} />
+                    <Route  path="/events-zurich" render={props => <Days path="/events-zurich" {...props} />} />
+                    <Route  path="/events-berlin" render={props => <Days path="/events-berlin" {...props} />} />
                     <Route
                         exact
                         path="/signup"
@@ -77,4 +77,4 @@ class App extends React.Component {
     }
 }
 
-export default App
+export default (App);
