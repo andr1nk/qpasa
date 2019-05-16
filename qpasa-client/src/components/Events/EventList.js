@@ -9,12 +9,11 @@ class EventList extends React.Component {
     }
 
     fetchData = () => {
-        axios.get(`${process.env.REACT_APP_SERVER_URL}/api/events`)
-            .then(response => {
-                this.setState({
-                    events: response.data
-                })
+        axios.get(`${process.env.REACT_APP_SERVER_URL}/api/events`).then(response => {
+            this.setState({
+                events: response.data
             })
+        })
     }
 
     componentDidMount() {
@@ -22,20 +21,27 @@ class EventList extends React.Component {
     }
 
     render() {
-        let day = this.props.location.pathname.replace(`${this.props.path}/`, "")
+        let day = this.props.location.pathname.replace(`${this.props.path}/`, '')
         return (
             <div>
                 <div className="container event-container">
                     {this.props.path === '/events-zurich'
                         ? this.state.events
-                            .sort((a, b) => a.location.name.localeCompare(b.location.name))
-                            .filter(event => event.location.city === 'Zürich' && event.date === day)
-                            .map((event, index) => <div key={index}><Event event={event} /> </div>)
+                              .sort((a, b) => a.location.name.localeCompare(b.location.name))
+                              .filter(event => event.location.city === 'Zürich' && event.date === day)
+                              .map((event, index) => (
+                                  <div key={index}>
+                                      <Event event={event} />{' '}
+                                  </div>
+                              ))
                         : this.state.events
-                            .sort((a, b) => a.location.name.localeCompare(b.location.name))
-                            .filter(event => event.location.city === 'Berlin' && event.date === day)
-                            .map((event, index) => <div key={index}><Event event={event} /></div>)
-                    }
+                              .sort((a, b) => a.location.name.localeCompare(b.location.name))
+                              .filter(event => event.location.city === 'Berlin' && event.date === day)
+                              .map((event, index) => (
+                                  <div key={index}>
+                                      <Event event={event} />
+                                  </div>
+                              ))}
                 </div>
             </div>
         )
