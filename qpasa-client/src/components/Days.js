@@ -78,6 +78,40 @@ class Days extends React.Component {
                 <br />
                 <br />
                 <br />
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Filter
+                </button>
+                <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+                        <form>
+                        {this.props.path === '/events-zurich'
+                        ? 
+                        this.state.locations
+                        .sort((a, b) => a.name.localeCompare(b.name))
+                        .filter(location => location.city === 'Zürich')
+                            .map((location, index) => {
+                                return (
+                                    <div key={index}>
+                                    <label>{location.name}</label>  
+                                    <input type="checkbox" name={location.name} checked={location.selected} onChange={(e) => this.handleChange(e)} /> 
+                                </div>)
+                        })
+                        :
+                        this.state.locations
+                        .sort((a, b) => a.name.localeCompare(b.name))
+                        .filter(location => location.city === 'Berlin')
+                        .map((location, index) => {
+                            return (
+                                <div key={index}>
+                                    <label>{location.name}</label>  
+                                    <input type="checkbox" name={location.name} checked={location.selected} onChange={(e) => this.handleChange(e)} /> 
+                                </div>)
+                        }) 
+                    }
+                        </form>
+                    </div>
+                </div>
+                <br />
 
                 <div className="btn-group" role="group" aria-label="Basic example">
                     <Link to={`${this.props.path}/${day1}`}>
@@ -101,41 +135,8 @@ class Days extends React.Component {
                     <Link to={`${this.props.path}/${day7}`}>
                         <button className="btn btn-secondary" style={day === day7 ? { backgroundColor: "red" } : { backgroundColor: "blue" }} type="button" onClick={(e) => this.onClickHandler(e)} name={day7}> {day7Str} </button>
                     </Link>
-                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                        Filter
-                    </button>
                 </div>
 
-                <div class="collapse" id="collapseExample">
-                    <div class="card card-body">
-                        <form>
-                        {this.props.path === '/events-zurich'
-                        ? 
-                        this.state.locations
-                            .sort((a, b) => a.name.localeCompare(b.name))
-                            .filter(location => location.city === 'Zürich')
-                            .map((location, index) => {
-                                return (
-                                <div key={index}>
-                                    <label>{location.name}</label>  
-                                    <input type="checkbox" name={location.name} checked={location.selected} onChange={(e) => this.handleChange(e)} /> 
-                                </div>)
-                        })
-                        :
-                        this.state.locations
-                            .sort((a, b) => a.name.localeCompare(b.name))
-                            .filter(location => location.city === 'Berlin')
-                            .map((location, index) => {
-                                return (
-                                <div key={index}>
-                                    <label>{location.name}</label>  
-                                    <input type="checkbox" name={location.name} checked={location.selected} onChange={(e) => this.handleChange(e)} /> 
-                                </div>)
-                        }) 
-                        }
-                        </form>
-                    </div>
-                </div>
 
                 <SwipeableRoutes>
                     <Route
