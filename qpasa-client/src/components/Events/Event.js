@@ -1,15 +1,12 @@
 import React from 'react'
 import Map from '../Map'
 import './Event.css'
-import utf8 from "utf8"
-
 
 class Event extends React.Component {
     state = {
         currentMap: null
     }
 
-    
     showMapHandler = eventId => {
         this.setState({
             currentMap: eventId
@@ -20,7 +17,7 @@ class Event extends React.Component {
         const { date, _id, description, url } = this.props.event
         const { city, address } = this.props.event.location
         const { lat, long } = this.props.event.location.GPS
-        const eventName = utf8.encode(this.props.event.name)
+        const eventName = this.props.event.name
         const locationName = this.props.event.location.name
         return (
             <div className="card event-card" key={_id}>
