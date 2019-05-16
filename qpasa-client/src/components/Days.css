@@ -1,0 +1,14 @@
+.days-container {
+    margin-top: 70px;
+}
+
+.tap {
+    font-size: 30px;
+    color: black;
+}
+
+.button-group {
+    margin-bottom: -1px;
+    position: relative;
+    z-index: 1;
+}
