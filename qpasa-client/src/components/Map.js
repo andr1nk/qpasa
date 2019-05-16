@@ -4,8 +4,8 @@ import ReactMapGL, { Marker } from 'react-map-gl'
 class Location extends React.Component {
     state = {
         viewport: {
-            width: 345,
-            height: 300,
+            width: '100%',
+            height: 250,
             latitude: parseFloat(this.props.latitude),
             longitude: parseFloat(this.props.longitude),
             zoom: 15
@@ -21,7 +21,7 @@ class Location extends React.Component {
                 onViewportChange={viewport => this.setState({ viewport })}
             >
                 <Marker latitude={parseFloat(this.props.latitude)} longitude={parseFloat(this.props.longitude)}>
-                    <i className="fas fa-map-marker-alt" style={{ fontSize: '27px', color: '#cc1414' }} />
+                    <i className="fas fa-map-marker-alt" style={{ fontSize: '30px', color: '#EA4335' }} />
                 </Marker>
             </ReactMapGL>
         )
