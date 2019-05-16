@@ -1,5 +1,5 @@
 .days-container {
-    margin-top: 70px;
+    margin-top: 0px;
 }
 button.tap {
     border: solid 1px;
@@ -33,3 +33,5 @@ select:focus {
         font-size: 14px;
     }
 }
+
+
