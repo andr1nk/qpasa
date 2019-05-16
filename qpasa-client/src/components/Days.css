@@ -12,6 +12,10 @@
     position: relative;
     z-index: 1;
 }
+.button-group button:focus,
+select:focus {
+    outline: none;
+}
 
 .button-group a:first-child button {
     border-top-left-radius: 5px;
