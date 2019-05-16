@@ -1,35 +1,33 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { logout } from '../services/auth'
-import moment from "moment";
+import moment from 'moment'
 
-const day1 = moment(new Date()).format('DD.MM.YYYY')                    // Today
-
+const day1 = moment(new Date()).format('DD.MM.YYYY') // Today
 
 class Navbar extends React.Component {
-
     state = {
         loggedIn: this.props.loggedIn
-    };
+    }
 
     componentDidUpdate(prevProps) {
         if (this.props.loggedIn !== prevProps.loggedIn) {
-            this.setState({ loggedIn: this.props.loggedIn });
+            this.setState({ loggedIn: this.props.loggedIn })
         }
     }
 
     handleLogout = () => {
         logout().then(() => {
-            this.setState({ loggedIn: null });
-            this.props.setUser(null);
-        });
-    };
+            this.setState({ loggedIn: null })
+            this.props.setUser(null)
+        })
+    }
 
     render() {
         return (
-            <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <nav className="navbar navbar-dark bg-dark navbar-expand-lg fixed-top">
                 <a className="navbar-brand" href="/">
-                    Q'pasa
+                    <span id="logo">Q'pasa</span>
                 </a>
                 <button
                     className="navbar-toggler"
@@ -59,38 +57,36 @@ class Navbar extends React.Component {
                                 Berlin
                             </Link>
                         </li>
-                        {this.state.loggedIn ?
-                            (
-                                <ul className="navbar-nav">
-                                    <li className="nav-item" onClick={this.handleLogout}>
-                                        <Link to="/" className="nav-link">
-                                            logout
-                                        </Link>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link to="/locations" className="nav-link">
-                                            locations
-                                        </Link>
-                                    </li>
-
-                                </ul>
-                            ) : (
-                                <ul className="navbar-nav">
-                                    <li className="nav-item">
-                                        <Link to="/signup" className="nav-link">
-                                            Sign up
-                                        </Link>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link to="/login" className="nav-link">
-                                            Login
-                                        </Link>
-                                    </li>
-                                </ul>
-                            )}
+                        {this.state.loggedIn ? (
+                            <ul className="navbar-nav">
+                                <li className="nav-item" onClick={this.handleLogout}>
+                                    <Link to="/" className="nav-link">
+                                        logout
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link to="/locations" className="nav-link">
+                                        locations
+                                    </Link>
+                                </li>
+                            </ul>
+                        ) : (
+                            <ul className="navbar-nav">
+                                <li className="nav-item">
+                                    <Link to="/signup" className="nav-link">
+                                        Sign up
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link to="/login" className="nav-link">
+                                        Login
+                                    </Link>
+                                </li>
+                            </ul>
+                        )}
                     </ul>
                 </div>
-            </nav >
+            </nav>
         )
     }
 }

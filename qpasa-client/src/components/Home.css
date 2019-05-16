@@ -1,5 +1,5 @@
 .teaser {
-    background-image: url('./teaser-image.jpg');
+    background-image: url('./teaser-image2.jpg');
     padding: 100px 0;
     background-size: cover;
     background-position: center;
@@ -23,4 +23,12 @@
 
 .button {
     margin: 20px;
+}
+
+.button > a {
+    color: white;
+}
+
+.button > a:hover {
+    color: gray;
 }

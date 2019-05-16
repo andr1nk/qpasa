@@ -42,10 +42,13 @@ class EventList extends React.Component {
                             })
                             .map((event, index) => <div key={index}><Event event={event} /> </div>)
                         : this.state.events
-                            .sort((a, b) => a.location.name.localeCompare(b.location.name))
-                            .filter(event => event.location.city === 'Berlin' && event.date === day)
-                            .map((event, index) => <div key={index}><Event event={event} /></div>)
-                    }
+                              .sort((a, b) => a.location.name.localeCompare(b.location.name))
+                              .filter(event => event.location.city === 'Berlin' && event.date === day && this.props.locations.find(location => event.location.name === location.name).selected === true)
+                              .map((event, index) => (
+                                  <div key={index}>
+                                      <Event event={event} />
+                                  </div>
+                              ))}
                 </div>
             </div>
         )
