@@ -23,13 +23,21 @@ class EventList extends React.Component {
 
     render() {
         let day = this.props.location.pathname.replace(`${this.props.path}/`, "")
+        // console.log(this.props.locations)
+        // console.log(this.state.events)
         return (
             <div>
                 <div className="container event-container">
                     {this.props.path === '/events-zurich'
                         ? this.state.events
                             .sort((a, b) => a.location.name.localeCompare(b.location.name))
-                            .filter(event => event.location.city === 'Zürich' && event.date === day)
+                            .filter(event => {
+                                return (
+                                    event.location.city === 'Zürich' 
+                                    && event.date === day
+                                    && this.props.locations.find(location => event.location.name === location.name).selected === true
+                                )
+                            })
                             .map((event, index) => <div key={index}><Event event={event} /> </div>)
                         : this.state.events
                             .sort((a, b) => a.location.name.localeCompare(b.location.name))
