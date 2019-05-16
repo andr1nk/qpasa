@@ -5,26 +5,28 @@ import Event from './Event'
 
 class EventList extends React.Component {
     state = {
-        events: []
+        events: this.props.events
     }
 
-    fetchData = () => {
-        axios.get(`${process.env.REACT_APP_SERVER_URL}/api/events`)
-            .then(response => {
-                this.setState({
-                    events: response.data
-                })
-            })
-    }
+    // fetchData = () => {
+    //     axios.get(`${process.env.REACT_APP_SERVER_URL}/api/events`)
+    //         .then(response => {
+    //             this.setState({
+    //                 events: response.data
+    //             })
+    //         })
+    // }
 
-    componentDidMount() {
-        this.fetchData()
-    }
+    // componentDidMount() {
+    //     this.fetchData()
+    // }
 
+     componentDidUpdate(prevProps) {
+         if (prevProps !== this.props) this.setState({ events: this.props.events })
+     }
     render() {
         let day = this.props.location.pathname.replace(`${this.props.path}/`, "")
-        // console.log(this.props.locations)
-        // console.log(this.state.events)
+        console.log("Eventlist render")
         return (
             <div>
                 <div className="container event-container">
