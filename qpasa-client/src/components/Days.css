@@ -1,6 +1,9 @@
 .days-container {
     margin-top: 70px;
 }
+button.tap {
+    border: solid 1px;
+}
 
 .tap {
     font-size: 25px;
