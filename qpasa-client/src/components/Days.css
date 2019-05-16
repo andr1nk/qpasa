@@ -3,7 +3,7 @@
 }
 
 .tap {
-    font-size: 30px;
+    font-size: 25px;
     color: black;
 }
 
@@ -11,4 +11,23 @@
     margin-bottom: -1px;
     position: relative;
     z-index: 1;
+}
+
+.button-group a:first-child button {
+    border-top-left-radius: 5px;
+}
+
+.button-group a:last-child button {
+    border-top-right-radius: 5px;
+}
+
+@media (max-width: 480px) {
+    .tap {
+        font-size: 20px;
+    }
+}
+@media (max-width: 320px) {
+    .tap {
+        font-size: 14px;
+    }
 }

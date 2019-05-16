@@ -68,9 +68,11 @@ class Days extends React.Component {
                                 day === day1
                                     ? {
                                           backgroundColor: 'white',
-                                          borderBottomColor: 'white'
+                                          borderBottomColor: 'white',
+                                          position: 'relative',
+                                          zIndex: '1'
                                       }
-                                    : { backgroundColor: 'white' }
+                                    : { backgroundColor: '#343A40', color: 'white' }
                             }
                             type="button"
                             onClick={e => this.onClickHandler(e)}
@@ -86,9 +88,11 @@ class Days extends React.Component {
                                 day === day2
                                     ? {
                                           backgroundColor: 'white',
-                                          borderBottomColor: 'white'
+                                          borderBottomColor: 'white',
+                                          position: 'relative',
+                                          zIndex: '1'
                                       }
-                                    : { backgroundColor: 'white' }
+                                    : { backgroundColor: '#343A40', color: 'white' }
                             }
                             type="button"
                             onClick={e => this.onClickHandler(e)}
@@ -104,9 +108,11 @@ class Days extends React.Component {
                                 day === day3
                                     ? {
                                           backgroundColor: 'white',
-                                          borderBottomColor: 'white'
+                                          borderBottomColor: 'white',
+                                          position: 'relative',
+                                          zIndex: '1'
                                       }
-                                    : { backgroundColor: 'white' }
+                                    : { backgroundColor: '#343A40', color: 'white' }
                             }
                             type="button"
                             onClick={e => this.onClickHandler(e)}
@@ -122,9 +128,11 @@ class Days extends React.Component {
                                 day === day4
                                     ? {
                                           backgroundColor: 'white',
-                                          borderBottomColor: 'white'
+                                          borderBottomColor: 'white',
+                                          position: 'relative',
+                                          zIndex: '1'
                                       }
-                                    : { backgroundColor: 'white' }
+                                    : { backgroundColor: '#343A40', color: 'white' }
                             }
                             type="button"
                             onClick={e => this.onClickHandler(e)}
@@ -140,9 +148,11 @@ class Days extends React.Component {
                                 day === day5
                                     ? {
                                           backgroundColor: 'white',
-                                          borderBottomColor: 'white'
+                                          borderBottomColor: 'white',
+                                          position: 'relative',
+                                          zIndex: '1'
                                       }
-                                    : { backgroundColor: 'white' }
+                                    : { backgroundColor: '#343A40', color: 'white' }
                             }
                             type="button"
                             onClick={e => this.onClickHandler(e)}
@@ -158,9 +168,11 @@ class Days extends React.Component {
                                 day === day6
                                     ? {
                                           backgroundColor: 'white',
-                                          borderBottomColor: 'white'
+                                          borderBottomColor: 'white',
+                                          position: 'relative',
+                                          zIndex: '1'
                                       }
-                                    : { backgroundColor: 'white' }
+                                    : { backgroundColor: '#343A40', color: 'white' }
                             }
                             type="button"
                             onClick={e => this.onClickHandler(e)}
@@ -176,9 +188,11 @@ class Days extends React.Component {
                                 day === day7
                                     ? {
                                           backgroundColor: 'white',
-                                          borderBottomColor: 'white'
+                                          borderBottomColor: 'white',
+                                          position: 'relative',
+                                          zIndex: '1'
                                       }
-                                    : { backgroundColor: 'white' }
+                                    : { backgroundColor: '#343A40', color: 'white' }
                             }
                             type="button"
                             onClick={e => this.onClickHandler(e)}
