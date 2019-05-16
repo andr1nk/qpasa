@@ -67,52 +67,102 @@ class Days extends React.Component {
         });
     }
 
+    topFunction() {
+        console.log("topfunction")
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+
     render() {
         const day = this.props.location.pathname.replace(`${this.props.path}/`, '')
         return (
-        <div>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
             <div>
-                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                        Filter
-                </button>
-                <div class="collapse" id="collapseExample">
-                    <div class="card card-body">
-                        <form>
-                                {this.props.path === '/events-zurich'
-                                    ?
-                                    this.state.locations
-                                        .sort((a, b) => a.name.localeCompare(b.name))
-                                        .filter(location => location.city === 'Zürich')
-                                        .map((location, index) => {
-                                            return (
-                                                <div key={index}>
-                                                    <label>{location.name}</label>
-                                                    <input type="checkbox" name={location.name} checked={location.selected} onChange={(e) => this.handleChange(e)} />
-                                                </div>)
-                                        })
-                                    :
-                                    this.state.locations
-                                        .sort((a, b) => a.name.localeCompare(b.name))
-                                        .filter(location => location.city === 'Berlin')
-                                        .map((location, index) => {
-                                            return (
-                                                <div key={index}>
-                                                    <label>{location.name}</label>
-                                                    <input type="checkbox" name={location.name} checked={location.selected} onChange={(e) => this.handleChange(e)} />
-                                                </div>)
-                                        })
-                                }
-                            </form>
+                <div style={{
+                    height: "60px",
+                    display: "flex",
+                    justifyContent: "center",
+                    position: "fixed",
+                    bottom: "20px",
+                    right: "20px",
+                    zIndex: "99"
+                }
+                }>
+                    <button onClick={this.topFunction} 
+                        className="btn btn-danger btn-circle btn-x1" 
+                        type="button" 
+                        data-toggle="collapse" 
+                        data-target="#collapseExample" 
+                        aria-expanded="false" 
+                        aria-controls="collapseExample"
+                        style={{
+                            width: "70px",
+                            height: "70px",
+                            padding: "10px 16px",
+                            fontSize: "24px",
+                            lineHeight: "1.33",
+                            borderRadius: "35px"
+                        }}
+                        >
+                        <i className="fas fa-filter"></i>
+                    </button>
+                </div>
+
+                <div className="space" style={{ height: "70px" }}></div>
+
+                <div className="collapse" id="collapseExample" >
+                    <div className="card card-body" style={{ border: "none", paddingTop: "10px" }}>
+                        <form 
+                            className = "locations-filter-wrapper" 
+                            style={{ overflow: "hidden", background: "Gainsboro", paddingLeft: "10%" }}>
+                            {this.props.path === '/events-zurich'
+                                ?
+                                this.state.locations
+                                    .sort((a, b) => a.name.localeCompare(b.name))
+                                    .filter(location => location.city === 'Zürich')
+                                    .map((location, index) => {
+                                        return (
+                                            <div className="custom-control custom-checkbox" 
+                                                key={index} 
+                                                style={{ 
+                                                    float: "left", 
+                                                    width: "calc(30%)", 
+                                                    boxSizing: "border-box", 
+                                                    color: "#171e42", 
+                                                    padding: "10px",
+                                                    marginLeft: "20px"
+                                                }}
+                                            >
+                                                <input type="checkbox" className="custom-control-input" id={location.name} name={location.name} checked={location.selected} onChange={(e) => this.handleChange(e)} />
+                                                <label className="custom-control-label" htmlFor={location.name}>{location.name}</label>
+                                            </div>
+                                        )
+                                    })
+                                :
+                                this.state.locations
+                                    .sort((a, b) => a.name.localeCompare(b.name))
+                                    .filter(location => location.city === 'Berlin')
+                                    .map((location, index) => {
+                                        return (
+                                            <div className="custom-control custom-checkbox"
+                                                key={index} 
+                                                style={{ 
+                                                    float: "left", 
+                                                    width: "calc(30%)", 
+                                                    boxSizing: "border-box", 
+                                                    color: "#171e42", 
+                                                    padding: "10px"
+                                                }}
+                                            >
+                                                <input type="checkbox" className="custom-control-input" id={location.name} name={location.name} checked={location.selected} onChange={(e) => this.handleChange(e)} />
+                                                <label className="custom-control-label" htmlFor={location.name}>{location.name}</label>
+                                            </div>
+                                        )
+                                    })
+                            }
+                        </form>
                     </div>
                 </div>
-            </div>
-            <br />
-            <div>
+
                 <div className="days-container">
                     <div className="text-center button-group" role="group" aria-label="Basic example">
                         <Link to={`${this.props.path}/${day1}`}>
@@ -257,41 +307,41 @@ class Days extends React.Component {
                         </Link>
                     </div>
                 </div>
+
+
+
+                <SwipeableRoutes>
+                    <Route
+                        path={`${this.props.path}/${day1}`}
+
+                        render={props => <EventList {...props} day={this.state.day} events={this.state.events} locations={this.state.locations} path={this.props.path} pathname={this.props.location.pathname} key={day1Str} />}
+                    />
+                    <Route
+                        path={`${this.props.path}/${day2}`}
+                        render={props => <EventList {...props} day={this.state.day} events={this.state.events} locations={this.state.locations} path={this.props.path} pathname={this.props.location.pathname} key={day2Str} />}
+                    />
+                    <Route
+                        path={`${this.props.path}/${day3}`}
+                        render={props => <EventList {...props} day={this.state.day} events={this.state.events} locations={this.state.locations} path={this.props.path} pathname={this.props.location.pathname} key={day3Str} />}
+                    />
+                    <Route
+                        path={`${this.props.path}/${day4}`}
+                        render={props => <EventList {...props} day={this.state.day} events={this.state.events} locations={this.state.locations} path={this.props.path} pathname={this.props.location.pathname} key={day4Str} />}
+                    />
+                    <Route
+                        path={`${this.props.path}/${day5}`}
+                        render={props => <EventList {...props} day={this.state.day} events={this.state.events} locations={this.state.locations} path={this.props.path} pathname={this.props.location.pathname} key={day5Str} />}
+                    />
+                    <Route
+                        path={`${this.props.path}/${day6}`}
+                        render={props => <EventList {...props} day={this.state.day} events={this.state.events} locations={this.state.locations} path={this.props.path} pathname={this.props.location.pathname} key={day6Str} />}
+                    />
+                    <Route
+                        path={`${this.props.path}/${day7}`}
+                        render={props => <EventList {...props} day={this.state.day} events={this.state.events} locations={this.state.locations} path={this.props.path} pathname={this.props.location.pathname} key={day7Str} />}
+                    />
+                </SwipeableRoutes>
             </div>
-
-
-            <SwipeableRoutes>
-                <Route
-                    path={`${this.props.path}/${day1}`}
-
-                    render={props => <EventList {...props} day={this.state.day} events={this.state.events} locations={this.state.locations} path={this.props.path} pathname={this.props.location.pathname} key={day1Str} />}
-                />
-                <Route
-                    path={`${this.props.path}/${day2}`}
-                    render={props => <EventList {...props} day={this.state.day} events={this.state.events} locations={this.state.locations} path={this.props.path} pathname={this.props.location.pathname} key={day2Str} />}
-                />
-                <Route
-                    path={`${this.props.path}/${day3}`}
-                    render={props => <EventList {...props} day={this.state.day} events={this.state.events} locations={this.state.locations} path={this.props.path} pathname={this.props.location.pathname} key={day3Str} />}
-                />
-                <Route
-                    path={`${this.props.path}/${day4}`}
-                    render={props => <EventList {...props} day={this.state.day} events={this.state.events} locations={this.state.locations} path={this.props.path} pathname={this.props.location.pathname} key={day4Str} />}
-                />
-                <Route
-                    path={`${this.props.path}/${day5}`}
-                    render={props => <EventList {...props} day={this.state.day} events={this.state.events} locations={this.state.locations} path={this.props.path} pathname={this.props.location.pathname} key={day5Str} />}
-                />
-                <Route
-                    path={`${this.props.path}/${day6}`}
-                    render={props => <EventList {...props} day={this.state.day} events={this.state.events} locations={this.state.locations} path={this.props.path} pathname={this.props.location.pathname} key={day6Str} />}
-                />
-                <Route
-                    path={`${this.props.path}/${day7}`}
-                    render={props => <EventList {...props} day={this.state.day} events={this.state.events} locations={this.state.locations} path={this.props.path} pathname={this.props.location.pathname} key={day7Str} />}
-                />
-            </SwipeableRoutes>
-        </div>
         )
     }
 }
