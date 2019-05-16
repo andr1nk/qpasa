@@ -14,9 +14,9 @@ import Days from './components/Days'
 
 import { Switch, Route } from 'react-router-dom'
 
-import moment from "moment";
+import moment from 'moment'
 
-const day1 = moment(new Date()).format('DD.MM.YYYY')                    // Today
+const day1 = moment(new Date()).format('DD.MM.YYYY') // Today
 
 class App extends React.Component {
     state = {
@@ -44,41 +44,43 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <Navbar setUser={this.setUser} loggedIn={this.state.loggedIn} />
-                <Switch>
-                    <Route exact path="/" component={Home} />
-                    <Route  path="/events-zurich" render={props => <Days path="/events-zurich" {...props} />} />
-                    <Route  path="/events-berlin" render={props => <Days path="/events-berlin" {...props} />} />
-                    <Route
-                        exact
-                        path="/signup"
-                        //  component={Signup}
-                        //  render allows us to pass props to our component inside Routes
-                        render={props => <Signup {...props} setUser={this.setUser} />}
-                    />
-                    <Route
-                        exact
-                        path="/login"
-                        //  component={login}
-                        //  render allows us to pass props to our component inside Routes
-                        render={props => <Login {...props} setUser={this.setUser} />}
-                    />
-                    <Route
-                        exact
-                        path="/locations/:id"
-                        render={props => <LocationDetails {...props} user={this.state.loggedIn} />}
-                    />
-                    <Route
-                        exact={true}
-                        path="/locations"
-                        user={this.state.loggedIn}
-                        render={props => <LocationList {...props} user={this.state.loggedIn} />}
-                    />
-                </Switch>
+                <div className="content">
+                    <Navbar setUser={this.setUser} loggedIn={this.state.loggedIn} />
+                    <Switch>
+                        <Route exact path="/" component={Home} />
+                        <Route path="/events-zurich" render={props => <Days path="/events-zurich" {...props} />} />
+                        <Route path="/events-berlin" render={props => <Days path="/events-berlin" {...props} />} />
+                        <Route
+                            exact
+                            path="/signup"
+                            //  component={Signup}
+                            //  render allows us to pass props to our component inside Routes
+                            render={props => <Signup {...props} setUser={this.setUser} />}
+                        />
+                        <Route
+                            exact
+                            path="/login"
+                            //  component={login}
+                            //  render allows us to pass props to our component inside Routes
+                            render={props => <Login {...props} setUser={this.setUser} />}
+                        />
+                        <Route
+                            exact
+                            path="/locations/:id"
+                            render={props => <LocationDetails {...props} user={this.state.loggedIn} />}
+                        />
+                        <Route
+                            exact={true}
+                            path="/locations"
+                            user={this.state.loggedIn}
+                            render={props => <LocationList {...props} user={this.state.loggedIn} />}
+                        />
+                    </Switch>
+                </div>
                 <Footer />
             </div>
         )
     }
 }
 
-export default (App);
+export default App
