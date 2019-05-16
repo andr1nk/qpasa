@@ -30,8 +30,11 @@ select:focus {
 
 @media (max-width: 480px) {
     .tap {
-        font-size: 14px;
+        font-size: 12px;
     }
 }
-
-
+@media (max-width: 320px) {
+    .tap {
+        font-size: 10px;
+    }
+}
