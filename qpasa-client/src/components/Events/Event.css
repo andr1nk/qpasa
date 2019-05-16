@@ -1,6 +1,15 @@
-.event-container {
-}
-
 .event-card {
     margin-bottom: 15px;
+}
+
+a.info-link {
+    font-size: 18px;
+}
+
+.info-link {
+    margin-bottom: 20px;
+}
+
+.event-button {
+    margin-top: 15px;
 }

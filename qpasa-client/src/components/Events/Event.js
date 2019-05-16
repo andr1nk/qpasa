@@ -23,15 +23,12 @@ class Event extends React.Component {
             <div className="card event-card" key={_id}>
                 <div className="card-body">
                     <h3 className="card-title">{eventName}</h3>
-                    <p className="card-text">
-                        <i className="far fa-calendar-alt" />
-                        {date}
-                    </p>
-
+                    <i className="fas fa-map-marker-alt" /> {locationName}
+                    {description === '' ? null : <p className="card-text">{description}</p>}
                     <p>
                         <button
                             onClick={() => this.showMapHandler(_id)}
-                            className="btn btn-outline-dark"
+                            className="btn btn-outline-dark event-button"
                             type="button"
                             data-toggle="collapse"
                             data-target={`#item-${_id.toString()}`}
@@ -46,13 +43,22 @@ class Event extends React.Component {
                             <div className="container">
                                 <div className="row">
                                     <div className="col-md-6">
-                                        <p className="card-text">{description}</p>
-                                        <p className="card-text">
+                                        <p>
+                                            <i className="far fa-calendar-alt" /> {date}
+                                        </p>
+                                        {description === '' ? null : (
+                                            <p>
+                                                <i className="fas fa-info" /> {description}
+                                            </p>
+                                        )}
+
+                                        <p>
                                             <i className="fas fa-map-marker-alt" /> {locationName} <br />
                                             {address} <br /> {city}
                                         </p>
-                                        <a href={url} target="_blank" className="card-link">
-                                            go to page
+
+                                        <a href={url} target="_blank" className="badge badge-dark info-link">
+                                            Go to webpage
                                         </a>
                                     </div>
                                     <div className="col-md-6">

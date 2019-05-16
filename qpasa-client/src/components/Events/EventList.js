@@ -24,7 +24,7 @@ class EventList extends React.Component {
         let day = this.props.location.pathname.replace(`${this.props.path}/`, '')
         return (
             <div>
-                <div className="container event-container">
+                <div className="container event-container col-md-8 offset-md-2">
                     {this.props.path === '/events-zurich'
                         ? this.state.events
                               .sort((a, b) => a.location.name.localeCompare(b.location.name))
