@@ -40,32 +40,30 @@ class Event extends React.Component {
                     </p>
                     <div className="collapse" id={`item-${_id.toString()}`}>
                         <div className="card card-body">
-                            <div className="container">
-                                <div className="row">
-                                    <div className="col-md-6">
+                            <div className="row">
+                                <div className="col-md-6">
+                                    <p>
+                                        <i className="far fa-calendar-alt" /> {date}
+                                    </p>
+                                    {description === '' ? null : (
                                         <p>
-                                            <i className="far fa-calendar-alt" /> {date}
+                                            <i className="fas fa-info" /> {description}
                                         </p>
-                                        {description === '' ? null : (
-                                            <p>
-                                                <i className="fas fa-info" /> {description}
-                                            </p>
-                                        )}
+                                    )}
 
-                                        <p>
-                                            <i className="fas fa-map-marker-alt" /> {locationName} <br />
-                                            {address} <br /> {city}
-                                        </p>
+                                    <p>
+                                        <i className="fas fa-map-marker-alt" /> {locationName} <br />
+                                        {address} <br /> {city}
+                                    </p>
 
-                                        <a href={url} target="_blank" className="badge badge-dark info-link">
-                                            Go to webpage
-                                        </a>
-                                    </div>
-                                    <div className="col-md-6">
-                                        {_id === this.state.currentMap && lat && long && (
-                                            <div>{<Map latitude={lat} longitude={long} />}</div>
-                                        )}
-                                    </div>
+                                    <a href={url} target="_blank" className="badge badge-dark info-link">
+                                        Go to webpage
+                                    </a>
+                                </div>
+                                <div className="col-md-6">
+                                    {_id === this.state.currentMap && lat && long && (
+                                        <div>{<Map latitude={lat} longitude={long} />}</div>
+                                    )}
                                 </div>
                             </div>
                         </div>
