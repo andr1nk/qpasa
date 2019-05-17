@@ -14,10 +14,10 @@ class Home extends React.Component {
                 </header>
                 <div className="container">
                     <div className="col-md-10 offset-md-1">
-                        <p className="description">
+                        <div className="description">
                             <h2 style={{textAlign: "center"}} >All your favourite parties with one click.</h2>
                             <br/>
-                        </p>
+                        </div>
                         <div className="buttons">
                             <button className="btn btn-lg btn-dark button">
                                 <Link to={`/events-zurich/${day1}`} className="nav-link">
